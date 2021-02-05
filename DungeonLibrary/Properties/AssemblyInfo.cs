@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DungeonApplication")]
+[assembly: AssemblyTitle("DungeonLibrary")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("HP Inc.")]
-[assembly: AssemblyProduct("DungeonApplication")]
+[assembly: AssemblyProduct("DungeonLibrary")]
 [assembly: AssemblyCopyright("Copyright © HP Inc. 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("145b93b1-f410-4b3d-80c9-f9e56223a3cc")]
+[assembly: Guid("e2b8e065-82f4-40fd-b502-7c27fda8026d")]
 
 // Version information for an assembly consists of the following four values:
 //
