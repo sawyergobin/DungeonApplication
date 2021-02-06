@@ -10,7 +10,7 @@ namespace DungeonLibrary
     {
         public PlayerBackstory PlayerBackstory { get; set; }
         public PlayerClass PlayerClass { get; set; }
-        public Weapon EquippedWeapon { get; set; }//create weapon class
+        public Weapon EquippedWeapon { get; set; }
         public List<Item> Inventory { get; set; }
 
         //ctor
@@ -20,12 +20,38 @@ namespace DungeonLibrary
             PlayerClass = playerClass;
             EquippedWeapon = equippedWeapon;
             Inventory = inventory;
+            //TODO Apply backstory and class stat changes as branching logic
+
+            switch (playerClass) //Class stat mods
+            {
+                case PlayerClass.Warrior:
+                    EquippedWeapon.MaxDamage += 2; //will this work with all weapons equipped later? Maybe have this calc in the method or combat.
+                    EquippedWeapon.MinDamage += 2;
+                    Defense += 10;
+                    break;
+
+                case PlayerClass.Thief:
+                    Accuracy += 15; //Also large def bonus on dodge //TODO Maybe start with health potion?
+                    break;
+
+            }
         }
 
         //Methods
-        //TODO ToString override for view self stats
+        
 
-        //TODO calc atk and def methods
+        public override string ToString()
+        {
+            return string.Format($"Hero Name: {Name}\nClass and Backstory: {PlayerClass}, {PlayerBackstory}\nHealth Remaining: {Life} / Maximum: {MaxLife}\n" +
+                $"Accuracy: {CalcAccuracy()}% (Chance to hit)\nDefense: {Defense}% (Chance to block or dodge an enemy attack that would otherwise hit)\n" +
+                $"Equipped Weapon: {EquippedWeapon}");
+        }
+
+
+        public override int CalcAccuracy()
+        {
+            return Accuracy + EquippedWeapon.AccuracyBonus;
+        }
 
         public override int CalcDamage()
         {

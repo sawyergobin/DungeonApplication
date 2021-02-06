@@ -53,5 +53,7 @@ namespace DungeonLibrary
         //abstract method forces definition to be given in derived classes
         public abstract int CalcDamage();
 
+        //TODO Create virtual TOSTRING() override
+
     }//end class
 }//end namespace

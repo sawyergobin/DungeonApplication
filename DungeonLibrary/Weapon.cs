@@ -28,7 +28,7 @@ namespace DungeonLibrary
         //ToString()
         public override string ToString()
         {
-            return string.Format(base.ToString() + $"Accuracy Bonus: {AccuracyBonus}\nDamage: {MinDamage} to {MaxDamage}{(IsBlessed ?"\nThis item has been blessed and is able to be used effectively against vampires" : "")}");
+            return string.Format(base.ToString() + $"\nWeapon Accuracy Bonus: {AccuracyBonus}%\nDamage: {MinDamage} to {MaxDamage} per hit.{(IsBlessed ?"\nThis weapon is blessed and is able to be used effectively against vampires" : "")}");
         }
 
 
