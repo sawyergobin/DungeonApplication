@@ -78,6 +78,8 @@ namespace ConsoleApp1
                 //TODO Create book class items
                 //create potion class items
                 //create potion class items
+
+                Item testItem = new Item("TestItem", "TestDescription");
                 #region Weapons
                 //Starter Weapons, identical stats.
                 Weapon stolenSword = new Weapon("Stolen Sword", "It's better if no one asks where you got this...", WeaponType.IronSword, 10, 1, 6, false);
@@ -97,11 +99,10 @@ namespace ConsoleApp1
                 #endregion
 
                 #endregion
-                //TODO Create book class items
-                //create potion class items
-                //create potion class items
-
+                
                 #region Monsters
+                //TODO Create All Monsters
+                //TODO Create Vampire child class
                 Monster batSwarm = new Monster("Swarm of Bats", 10, 10, 30, 10, "This swarm of hungry bats works together with a " +
                     "\ncohesion that seems nearly sentient", 1, 4);
 
@@ -113,9 +114,13 @@ namespace ConsoleApp1
 
                 #endregion
 
-                //TODO create room class and room index. Branch with room index number
-                #region Rooms
 
+                #region Rooms
+                //TODO create all rooms and room index. Branch with room index number
+
+                //Remember to create RoomLoot list before the room.
+                List<Item> drawBridgeEntranceLoot = new List<Item>() { testItem, ruggedAxe };
+                Room drawBridgeEntrance = new Room("Your Camp (Drawbridge Entrance)", "Your camp is here. The castle looms in the distance. The drawbridge is closed and you can see the lever to open it. Nearby lies an old corpse with a tattered leather satchel", drawBridgeEntranceLoot, false, true, false);
                 #endregion
                 List<Item> inventory = new List<Item>(); //needs created before backstory for sword.
                 #region Backstory Selection
@@ -126,14 +131,14 @@ namespace ConsoleApp1
                 do
                 {
                     Console.Clear();
-                    Console.WriteLine($"Welcome to -{applicationTitle}-, player!  \n\nTo play this game, please you select with your number keys from a series of choices presented to you. \n\nIn this adventure you take on the role of a character who has sought out the rumored lair of an infamous vampire lord known as Avernia The Cruel \nYour objective is to battle and defeat the nefarious undead. \nSurely this task will prove neither simple nor easy, but your motivations are undertaking it are your own. \nChoose one of the following backstories to determine your character's history and motivations. \n\nIn other words: Who are you?");
+                    Console.WriteLine($"Welcome to -{applicationTitle}-, player!  \n\nTo play this game, please you select with your number keys from a series of choices presented to you. \n\nIn this adventure you take on the role of a character who has sought out the rumored lair of an infamous vampire lord known as Avernia The Cruel. \nYour objective is to battle and defeat the nefarious undead. \nSurely this task will prove neither simple nor easy, but your motivations for undertaking it are your own. \nChoose one of the following backstories to determine your character's history and motivations. \n\nIn other words: Who are you?");
                     Console.WriteLine(@"
 +++++++++++++++
 |Fortune Seeker:
 +++++++++++++++
-You grew up a nobody, and have always been treated as such. 
+You grew up a nobody and have always been treated as such. 
 That’s about to change. Avernia's terrible reign has gone on far 
-too long and the hero that kills her will instantly become a legend.
+too long, and the hero that kills her will instantly become a legend.
 Hopefully if you secure ""fame"" then ""fortune"" falls right into place. 
 And now all that stands in your way is a musty old undead. 
 The stolen sword at your side is itching for a fight.");
@@ -146,7 +151,7 @@ You’ve vanquished zombies and banished ghosts,
 yet the land is still blighted with evil. 
 In your quest to travel the realm and rid it of evil, no deed shall 
 be as noble or as harrowing as braving the castle that looms before you. 
-The only thing stronger than your father’s sword at your side is your will.");
+The only thing stronger than your family’s sword at your side is your will.");
                     Console.WriteLine(@"
 ++++++++++++++++++++
 |Discredited Scholar:
@@ -219,10 +224,10 @@ but you hypothesize it’ll perform it's duty all the same.
 +++++++++
 |Warrior:
 +++++++++
-Some would call rushing headlong into danger with weapons brandished brave. Others may call it foolish. 
-You would say the fine details aren’t really all that important and it’s got you this far. 
+Some would call rushing headlong into danger with weapons brandished brave. Others would call it foolish. 
+You would say the fine details aren’t really all that important, and it’s got you this far. 
 You know how to get the most out of any weapon you may use and you wear a patchwork set of armor for protection.
-(+Weapon Damage +Defense)
+(+Weapon Damage, +Defense)
 
 +++++++
 |Thief:
@@ -230,7 +235,7 @@ You know how to get the most out of any weapon you may use and you wear a patchw
 Thief, Rogue, Swashbuckler, call it what you will. It’s no matter of debate that you possess a particular set of skills. 
 All that’s left is to put them to a good use in a place full of treasures, traps, and tricks. Luckily, you know just the place...
 When you attack, you do so with unerring accuracy and if you must flee, your light armor helps you get away safely.
-(+Weapon Accuracy +Very high Dodge Chance when fleeing)
+(+Weapon Accuracy, +Very high Dodge Chance when fleeing)
 
 [1] Warrior
 [2] Thief
@@ -267,7 +272,7 @@ When you attack, you do so with unerring accuracy and if you must flee, your lig
                 #endregion
 
                 #region Name Selection
-                Console.Write(@"A great philosopher once said
+                Console.Write(@"A great philosopher once said,
 
 ""Words may hold meaning
 but names hold power"" 
@@ -275,15 +280,92 @@ but names hold power""
 What is your name?: ");
                 string chosenName = Console.ReadLine().Trim();
                 #endregion
-                //creating hero with ctor.
                 PlayerCharacter hero = new PlayerCharacter(chosenName, 30, 30, 40, 5, chosenBackstory, chosenClass, backgroundSword, inventory);
-                //TODO Character Creation Logic: Backstory, Class, Name, (Horse's Name)
-                Console.WriteLine("Test Display: " + hero);
+                //TODO Character Creation Logic:(Horse's Name?)
+                
+                //Intro Text:
+                Console.WriteLine("Intro text to get you to campfire/drawbridge");
+                drawBridgeEntrance.IsCurrentRoom = true;
+
+                #region Camp/DrawbridgeEntrance
+                while (drawBridgeEntrance.IsCurrentRoom)
+                {
+
+                    Console.WriteLine($"{drawBridgeEntrance}");
+                    if (!drawBridgeEntrance.IsPuzzleComplete)
+                    {
+                        Console.WriteLine(@"
+ [1] View your Inventory
+ [2] Rest at campfire (restore all health)
+ [3] Look At Castle
+ [4] Search Corpse
+ [5] Pull Drawbridge Lever"); 
+                    }
+                    else
+                    {
+                        Console.WriteLine(@"
+ [1] View your Inventory
+ [2] Rest at campfire (restore all health)
+ [3] Look At Castle
+ [4] Search Corpse
+ [5] Cross Drawbridge");
+                    }
+                    ConsoleKey roomMenuChoice = Console.ReadKey(true).Key;
+                    //TODO FLESH OUT THESE OPTIONS AND MAKE OO WHEN POSSIBLE
+
+                    switch (roomMenuChoice)
+                    {
+                        case ConsoleKey.D1://view player inv
+                        case ConsoleKey.NumPad1:
+                            Console.Clear();
+                            //NEEDS method written
+                            break;
+
+                        case ConsoleKey.D2:
+                        case ConsoleKey.NumPad2:
+                            Console.Clear();
+                            //could use a custom heal method
+                            break;
+
+                        case ConsoleKey.D3:
+                        case ConsoleKey.NumPad3:
+                            Console.Clear();
+                            //could have a custom method for castle art display
+                            break;
+
+                        case ConsoleKey.D4:
+                        case ConsoleKey.NumPad4:
+                            Console.Clear();
+                            Formatting.ViewInventory(drawBridgeEntranceLoot, inventory);
+                            break;
+
+                        case ConsoleKey.D5:
+                        case ConsoleKey.NumPad5:
+                            Console.Clear();
+                            //switch puzzleComplete bool (hopefully this shows new menu)
+                            //rewrite description
+                            break;
+
+                        default:
+                            Console.Clear();
+                            Console.WriteLine($"{roomMenuChoice} was not a valid option. Select again");
+                            break;
+                    }
+
+
+
+
+                    
+
+                }
+                #endregion
 
                 #region Combat Functionality
 
                 Monster enemy = batSwarm; //Individualized enemy here
                 Console.WriteLine($"A {enemy.Name} is attacking you! Get ready to fight!"); //Customize per encounter
+                Console.WriteLine("Press any button to begin the fight!");//Pics maybe?
+                Console.ReadKey(true);
 
                 bool exitFight = false;
                 do
@@ -321,7 +403,7 @@ What is your name?: ");
                             }
                             else
                             {
-                                Console.WriteLine("As you flee, the {enemy} attempts to attack!");
+                                Formatting.RedText("As you flee, the {enemy} attempts to attack!");
                                 Combat.Attack(enemy, hero);
                             }
                             break;
@@ -359,12 +441,7 @@ What is your name?: ");
 
                 #endregion
 
-
-
-
-
-
-
+                
 
             } while (!exitApplication);
 
