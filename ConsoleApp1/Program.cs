@@ -75,10 +75,8 @@ namespace ConsoleApp1
                 #endregion
 
                 #region Items
-                //TODO Create book class items
-                //create potion class items
-                //create potion class items
-
+                //TODO Create books and misc items
+                
                 Item testItem = new Item("TestItem", "TestDescription");
                 #region Weapons
                 //Starter Weapons, identical stats.
@@ -116,11 +114,16 @@ namespace ConsoleApp1
 
 
                 #region Rooms
-                //TODO create all rooms and room index. Branch with room index number
-
+               
                 //Remember to create RoomLoot list before the room.
                 List<Item> drawBridgeEntranceLoot = new List<Item>() { testItem, ruggedAxe };
-                Room drawBridgeEntrance = new Room("Your Camp (Drawbridge Entrance)", "Your camp is here. The castle looms in the distance. The drawbridge is closed and you can see the lever to open it. Nearby lies an old corpse with a tattered leather satchel", drawBridgeEntranceLoot, false, true, false);
+                Room drawBridgeEntrance = new Room("Your Camp / Drawbridge Entrance", "Your camp is here. The castle looms in the distance. The drawbridge is closed and you can see the lever to open it. Nearby lies an old corpse with a tattered leather satchel", drawBridgeEntranceLoot, false, false, false);
+
+                List<Item> mainHallLoot = new List<Item>() { };//empty
+                Room mainHall = new Room("Main Hall", "This room must have once been magnificent to behold. " +
+                    "\nThis room serves to connect residents to many other rooms. " +
+                    "\nIt seems some time ago the massive central chandelier broke free and crashed to the floor.", mainHallLoot, false, false, false); //Some type of easter egg puzzle for the main hall? Or maybe a dev mode weapon
+                
                 #endregion
                 List<Item> inventory = new List<Item>(); //needs created before backstory for sword.
                 #region Backstory Selection
@@ -131,14 +134,14 @@ namespace ConsoleApp1
                 do
                 {
                     Console.Clear();
-                    Console.WriteLine($"Welcome to -{applicationTitle}-, player!  \n\nTo play this game, please you select with your number keys from a series of choices presented to you. \n\nIn this adventure you take on the role of a character who has sought out the rumored lair of an infamous vampire lord known as Avernia The Cruel. \nYour objective is to battle and defeat the nefarious undead. \nSurely this task will prove neither simple nor easy, but your motivations for undertaking it are your own. \nChoose one of the following backstories to determine your character's history and motivations. \n\nIn other words: Who are you?");
+                    Console.WriteLine($"Welcome to -{applicationTitle}-, player!  \n\nTo play this game, please you select with your number keys from a series of choices presented to you. \n\nIn this adventure you take on the role of a character who has sought out the rumored lair of an infamous vampire lord known as Marlon the Cruel. \nYour objective is to battle and defeat the nefarious undead. \nSurely this task will prove neither simple nor easy, but your motivations for undertaking it are your own. \nChoose one of the following backstories to determine your character's history and motivations. \n\nIn other words: Who are you?");
                     Console.WriteLine(@"
 +++++++++++++++
 |Fortune Seeker:
 +++++++++++++++
 You grew up a nobody and have always been treated as such. 
-That’s about to change. Avernia's terrible reign has gone on far 
-too long, and the hero that kills her will instantly become a legend.
+That’s about to change. Marlon's terrible reign has gone on far 
+too long, and the hero that kills him will instantly become a legend.
 Hopefully if you secure ""fame"" then ""fortune"" falls right into place. 
 And now all that stands in your way is a musty old undead. 
 The stolen sword at your side is itching for a fight.");
@@ -281,17 +284,17 @@ What is your name?: ");
                 string chosenName = Console.ReadLine().Trim();
                 #endregion
                 PlayerCharacter hero = new PlayerCharacter(chosenName, 30, 30, 40, 5, chosenBackstory, chosenClass, backgroundSword, inventory);
-                //TODO Character Creation Logic:(Horse's Name?)
+                //TODO Horse's Name? + pet at camp?)
                 
                 //Intro Text:
-                Console.WriteLine("Intro text to get you to campfire/drawbridge");
+                Console.WriteLine("You have travelled long and far to finally make your camp at the castle's gate.");
                 drawBridgeEntrance.IsCurrentRoom = true;
 
                 #region Camp/DrawbridgeEntrance
                 while (drawBridgeEntrance.IsCurrentRoom)
                 {
 
-                    Console.WriteLine($"{drawBridgeEntrance}");
+                    Console.WriteLine(drawBridgeEntrance);
                     if (!drawBridgeEntrance.IsPuzzleComplete)
                     {
                         Console.WriteLine(@"
@@ -311,26 +314,27 @@ What is your name?: ");
  [5] Cross Drawbridge");
                     }
                     ConsoleKey roomMenuChoice = Console.ReadKey(true).Key;
-                    //TODO FLESH OUT THESE OPTIONS AND MAKE OO WHEN POSSIBLE
-
+                    
                     switch (roomMenuChoice)
                     {
                         case ConsoleKey.D1://view player inv
                         case ConsoleKey.NumPad1:
                             Console.Clear();
-                            //NEEDS method written
+                            Console.WriteLine("Viewing inventory method is WIP");
                             break;
 
                         case ConsoleKey.D2:
                         case ConsoleKey.NumPad2:
                             Console.Clear();
-                            //could use a custom heal method
+                            Formatting.FullHeal(hero);
+                            Console.WriteLine("You take time to rest and heal your wounds.\nYou awaken ready to face your challenges.");
                             break;
 
                         case ConsoleKey.D3:
                         case ConsoleKey.NumPad3:
                             Console.Clear();
-                            //could have a custom method for castle art display
+                            Formatting.DisplayCastleArt();//Randomize response here?
+                            Console.WriteLine("You look at the castle and feel apprehensive of what's to come.");
                             break;
 
                         case ConsoleKey.D4:
@@ -341,108 +345,210 @@ What is your name?: ");
 
                         case ConsoleKey.D5:
                         case ConsoleKey.NumPad5:
-                            Console.Clear();
-                            //switch puzzleComplete bool (hopefully this shows new menu)
-                            //rewrite description
+                            if (!drawBridgeEntrance.IsPuzzleComplete)
+                            {
+
+                                Console.Clear();
+                                Console.WriteLine("Pulling the old wooden lever sets into motion the grinding of ancient sounding gears in the castle. " +
+                                    "\nThe drawbridge lowers across the moat" +
+                                    "\nThe wood of the bridge is old and rotted and the chains that hold it up are rusted" +
+                                    "\nThe drawbridge is able to be crossed now");
+                                drawBridgeEntrance.Description = "Your camp is here. The castle looms in the distance. You have pulled the lever and the drawbridge is open. Nearby lies an old corpse with a tattered leather satchel.";
+                                drawBridgeEntrance.IsPuzzleComplete = true; 
+                            }//end if
+                            else
+                            {
+                                Console.Clear();
+                                Console.WriteLine("As you make your way across the rickety bridge and approach the castle.");
+                                if (!drawBridgeEntrance.IsMonsterDead)
+                                {
+
+                                    Console.WriteLine("It seems the commotion has awoken a swarm of hungry bats!");
+                                    #region Combat Functionality
+
+                                    Monster enemy = batSwarm; //Individualized enemy here
+                                    Console.WriteLine($"A {enemy.Name} is attacking you! Get ready to fight!"); //Customize per encounter
+                                    Console.WriteLine("Press any button to begin the fight!");//Pics maybe?
+                                    Console.ReadKey(true);
+
+                                    bool exitFight = false;
+                                    do
+                                    {
+                                        Console.WriteLine($"Choose an Action:" +
+                                            $"\n[1] Attack the {enemy.Name}" +
+                                            $"\n[2] Flee (Enemy will attempt to attack)" +
+                                            $"\n[3] View Your Stats" +
+                                            $"\n[4] View {enemy.Name}'s Stats" +
+                                            $"\n[5] Access Your Inventory");
+                                        ConsoleKey userChoice = Console.ReadKey(true).Key;
+                                        Console.Clear();
+
+                                        switch (userChoice)
+                                        {
+                                            case ConsoleKey.D1://Attack
+                                            case ConsoleKey.NumPad1:
+                                                Combat.Battle(hero, enemy);
+                                                if (enemy.Life <= 0)
+                                                {
+                                                    Formatting.GreenText($"The {enemy.Name} now lies dead before you.");
+                                                    //Switch a room bool here?
+                                                    exitFight = true;
+                                                }
+                                                break;
+
+                                            case ConsoleKey.D2://Flee
+                                            case ConsoleKey.NumPad2:
+                                                if (hero.PlayerClass == PlayerClass.Thief)
+                                                {
+                                                    Console.WriteLine($"As a thief, you have a high chance to avoid the {enemy.Name}'s attack while you flee");
+                                                    hero.Defense += 50;
+                                                    Combat.Attack(enemy, hero);
+                                                    hero.Defense -= 50;
+                                                }
+                                                else
+                                                {
+                                                    Formatting.RedText("As you flee, the {enemy} attempts to attack!");
+                                                    Combat.Attack(enemy, hero);
+                                                }
+                                                break;
+
+                                            case ConsoleKey.D3://View Player Stats
+                                            case ConsoleKey.NumPad3:
+                                                Console.WriteLine(hero);
+                                                //TODO Add backstory functionality here
+                                                break;
+
+                                            case ConsoleKey.D4://View Monster Stats
+                                            case ConsoleKey.NumPad4:
+                                                Console.WriteLine(enemy);
+                                                //TODO Add backstory functionality here
+                                                break;
+
+                                            case ConsoleKey.D5://View Inventory
+                                            case ConsoleKey.NumPad5:
+                                                Console.WriteLine(inventory);
+                                                break;
+
+                                            default:
+                                                Console.Clear();
+                                                Console.WriteLine($"{userChoice} is an invalid option, please try again.");
+                                                break;
+                                        }//end menu switch
+                                        if (hero.Life <= 0)
+                                        {
+                                            Console.WriteLine($"You have been slain by the {enemy.Name}. Your bones will lie here forever");
+                                            exitApplication = true;
+                                        }
+
+
+                                    } while (!exitFight && !exitApplication);
+
+                                    #endregion
+                                   
+                                    drawBridgeEntrance.IsMonsterDead = true;
+                                }//end bat fight
+                                else
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine("You cross the drawbridge and enter the looming castle");
+                                }
+                                drawBridgeEntrance.IsCurrentRoom = false;
+                                mainHall.IsCurrentRoom = true;
+                                
+                            }//end else
                             break;
 
                         default:
                             Console.Clear();
                             Console.WriteLine($"{roomMenuChoice} was not a valid option. Select again");
                             break;
-                    }
-
-
-
-
+                    }//end switch
                     
-
-                }
+                }//end drawbridge isCurrentRoom
                 #endregion
 
-                #region Combat Functionality
+                #region MainHall
 
-                Monster enemy = batSwarm; //Individualized enemy here
-                Console.WriteLine($"A {enemy.Name} is attacking you! Get ready to fight!"); //Customize per encounter
-                Console.WriteLine("Press any button to begin the fight!");//Pics maybe?
-                Console.ReadKey(true);
-
-                bool exitFight = false;
-                do
+                while (mainHall.IsCurrentRoom)
                 {
-                    Console.WriteLine($"Choose an Action:" +
-                        $"\n[1] Attack the {enemy.Name}" +
-                        $"\n[2] Flee (Enemy will attempt to attack)" +
-                        $"\n[3] View Your Stats" +
-                        $"\n[4] View {enemy.Name}'s Stats" +
-                        $"\n[5] Access Your Inventory");
-                    ConsoleKey userChoice = Console.ReadKey(true).Key;
-                    Console.Clear();
-
-                    switch (userChoice)
+                    if (!mainHall.IsMonsterDead)
                     {
-                        case ConsoleKey.D1://Attack
-                        case ConsoleKey.NumPad1:
-                            Combat.Battle(hero, enemy);
-                            if (enemy.Life <= 0)
-                            {
-                                Formatting.GreenText($"The {enemy.Name} now lies dead before you.");
-                                //Switch a room bool here?
-                                exitFight = true;
-                            }
-                            break;
+                        //nested if tree here for survival vs instadeath
+                        Console.WriteLine("Intro to main hall and death by vamp if you don't have the holy water necklace");
+                        //Maybe have an actual little fight here but have Marlon FullHeal() every round for like 3 rounds? 
+                        mainHall.IsMonsterDead = true;
+                    }//end vamp confrontation
 
-                        case ConsoleKey.D2://Flee
-                        case ConsoleKey.NumPad2:
-                            if (hero.PlayerClass == PlayerClass.Thief)
-                            {
-                                Console.WriteLine($"As a thief, you have a high chance to avoid the {enemy.Name}'s attack while you flee");
-                                hero.Defense += 50;
-                                Combat.Attack(enemy, hero);
-                                hero.Defense -= 50;
-                            }
-                            else
-                            {
-                                Formatting.RedText("As you flee, the {enemy} attempts to attack!");
-                                Combat.Attack(enemy, hero);
-                            }
-                            break;
-
-                        case ConsoleKey.D3://View Player Stats
-                        case ConsoleKey.NumPad3:
-                            Console.WriteLine(hero);
-                            //TODO Add backstory functionality here
-                            break;
-
-                        case ConsoleKey.D4://View Monster Stats
-                        case ConsoleKey.NumPad4:
-                            Console.WriteLine(enemy);
-                            //TODO Add backstory functionality here
-                            break;
-
-                        case ConsoleKey.D5://View Inventory
-                        case ConsoleKey.NumPad5:
-                            Console.WriteLine(inventory);
-                            break;
-
-                        default:
-                            Console.Clear();
-                            Console.WriteLine($"{userChoice} is an invalid option, please try again.");
-                            break;
-                    }//end menu switch
-                    if (hero.Life <= 0)
+                    else
                     {
-                        Console.WriteLine($"You have been slain by the {enemy.Name}. Your bones will lie here forever");
-                        exitApplication = true;
-                    }
+                        Console.WriteLine(mainHall);
+                        Console.WriteLine(@"
+[1] View your inventory.
+[2] Go to Dining Room 
+[3] Go to Art Gallery
+[4] Go to Old Library
+[5] Go to Crypt
+[6] Go to Tower ");
+                        ConsoleKey roomMenuChoice = Console.ReadKey(true).Key;
+
+                        switch (roomMenuChoice)
+                        {
+                            case ConsoleKey.D1:
+                            case ConsoleKey.NumPad1:
+                                Console.Clear();
 
 
-                } while (!exitFight && !exitApplication);
+                                break;
+
+                            case ConsoleKey.D2:
+                            case ConsoleKey.NumPad2:
+                                Console.Clear();
+
+                                mainHall.IsCurrentRoom = false;
+                                break;
+
+                            case ConsoleKey.D3:
+                            case ConsoleKey.NumPad3:
+                                Console.Clear();
+
+                                mainHall.IsCurrentRoom = false;
+                                break;
+
+                            case ConsoleKey.D4:
+                            case ConsoleKey.NumPad4:
+                                Console.Clear();
+
+                                mainHall.IsCurrentRoom = false;
+                                break;
+
+                            case ConsoleKey.D5:
+                            case ConsoleKey.NumPad5:
+                                Console.Clear();
+
+                                mainHall.IsCurrentRoom = false;
+                                break;
+
+                            case ConsoleKey.D6:
+                            case ConsoleKey.NumPad6:
+                                Console.Clear();
+
+                                mainHall.IsCurrentRoom = false;
+                                break;
+
+                            //TODO maybe have easter egg or dev weapon here?
+
+                            default:
+                                Console.Clear();
+                                Console.WriteLine($"{roomMenuChoice} was not a valid option. Select again");
+                                break;
+                        }//end roomMenu switch
+
+                    }//end no vamp confrontation
+                }//end mainhall.IsCurrentRoom
 
                 #endregion
 
                 
-
             } while (!exitApplication);
 
             //TODO rand gen the end screen?
@@ -495,9 +601,7 @@ What is your name?: ");
 ");
 
             #endregion
-
             
-
         }//end Main()
   }//end class
 }//end namespace
