@@ -11,18 +11,22 @@ namespace DungeonLibrary
         //Name, Description, List<items>, isMonsterDead, isPuzzleComplete, 
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Item> RoomLoot { get; set; }
+        public List<Weapon> RoomWeaponLoot { get; set; }
+        public List<Book> RoomBookLoot { get; set; }
+        public List<OtherItem> RoomOtherLoot { get; set; }
         public bool IsCurrentRoom { get; set; }
         public bool IsMonsterDead { get; set; }
         public bool IsPuzzleComplete { get; set; }
 
-        public Room(string name, string description, List<Item> roomLoot, bool isCurrentRoom, bool isMonsterDead, bool isPuzzleComplete)
+        public Room(string name, string description, List<Weapon> roomWeaponLoot, List<Book> roomBookLoot, List<OtherItem> roomOtherLoot, bool isCurrentRoom, bool isMonsterDead, bool isPuzzleComplete)
         {
             IsMonsterDead = isMonsterDead;
             IsPuzzleComplete = isPuzzleComplete;
             Name = name;
             Description = description;
-            RoomLoot = roomLoot;
+            RoomWeaponLoot = roomWeaponLoot;
+            RoomBookLoot = roomBookLoot;
+            RoomOtherLoot = roomOtherLoot;
             IsCurrentRoom = isCurrentRoom;
         }
 

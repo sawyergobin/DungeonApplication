@@ -15,9 +15,10 @@ namespace ConsoleApp1
             bool exitApplication = false;
             do
             {
-
                 string applicationTitle = "The Dead of the Night";
                 Formatting.Header(applicationTitle);
+
+                //TODO Switch warrior and thief bonuses to combat method
 
                 #region TitleCard
                 Console.WriteLine(@" 
@@ -29,16 +30,16 @@ namespace ConsoleApp1
    ▀        █  ▀███▀       ███▀  ▀███▀      █ ███▀             █           ▀        █  ▀███▀       █  █ █  ▐  ███     █    ▀      
            ▀                               █                    ▀                  ▀               █   ██            ▀            
                                          ▀       
-                                          ,,,,,,,
-                                ,╖@╫╢▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒╬@╦╓,                                        
-                           ┌@╢▒▒▒▒▒▒▒▒▒▒░░░░░░╜▒▒▒▒▒▒▒▒▒▒╢╣▓%╖        `                      `
-                       ,╦╣▒▒▒░░░░░░░▒▒▒▒░░░░░░░░░░░▒▒▒░▒▒▒╢╣╫╢▒▓N,           '                     
-                    ,╗╣▒▒▒▒▒░░░░░░░▒▒▒▒░░░░░░░░░░░░▒▒▒▒▒▒▒╣╢╢╫╣╫╢▒▒@,              `      `       
-                  ┌╬▒▒▒▒▒▒▒▒▒░░░▒▒╢▒▒▒░░▒░░░░░░░░▒@╣╢▒╫▒▒▒▒╢▒╢▒▒▒╢╢▒▒╣╖               `            
-                ┌╣▒▒▒▒▒▒▒▒▒▒▒▒▒▒╢▒▒▒░░░░░░░░▒▒▒▒▒▒▒▒░░░░░▒▒▒▒▒▒▒▒▒▒╢╢▒▒╣w      '
-              ,╣▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░▒▒▒▒▒▒▒▒░░░▒░▒▒▒▒▒▒▒▒▒▒▒╣╢╢▒▒▓,            `          
-             ╓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒╢▒▒▒▒▒▒▒▒▒▒╢▒▒╢▒╢▒╣@                 '
-            ╫▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░▒░▒▒▒▒▒╢╣▒▒▒▒╢▒▒▒▒▒▒╫▒▒▒▒╢▒▒▓         `
+                                          ,,,,,,,                                                               '
+                                ,╖@╫╢▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒╬@╦╓,                           .                '               
+                           ┌@╢▒▒▒▒▒▒▒▒▒▒░░░░░░╜▒▒▒▒▒▒▒▒▒▒╢╣▓%╖        `                      `            '   
+                       ,╦╣▒▒▒░░░░░░░▒▒▒▒░░░░░░░░░░░▒▒▒░▒▒▒╢╣╫╢▒▓N,           '                   '                    
+                    ,╗╣▒▒▒▒▒░░░░░░░▒▒▒▒░░░░░░░░░░░░▒▒▒▒▒▒▒╣╢╢╫╣╫╢▒▒@,      '        `      `           '             
+                  ┌╬▒▒▒▒▒▒▒▒▒░░░▒▒╢▒▒▒░░▒░░░░░░░░▒@╣╢▒╫▒▒▒▒╢▒╢▒▒▒╢╢▒▒╣╖               `           '             
+                ┌╣▒▒▒▒▒▒▒▒▒▒▒▒▒▒╢▒▒▒░░░░░░░░▒▒▒▒▒▒▒▒░░░░░▒▒▒▒▒▒▒▒▒▒╢╢▒▒╣w      '             '                  
+              ,╣▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░▒▒▒▒▒▒▒▒░░░▒░▒▒▒▒▒▒▒▒  ╣╢╢▒▒▓,            `          '
+             ╓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒╢▒▒▒▒▒▒▒▒▒ ╢▒▒╢▒╢▒╣@                 '
+            ╫▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░▒░▒▒▒▒▒╢╣▒▒▒▒╢▒▒▒▒    ▒▒▒╢▒▒▓         `          .
            ╣▒▒▒▒▒▒▒▒▒▒░░░░▒░▒░░░░░░░░░░░░░░░░░░▒▒╢▒▒╣▒▒▒,   ╣▒▒▒╣▒▒▒▒▒▒▒▒▒▒▒▒╢ `           . 
           Æ╢▒╢╣▒▒▒▒▒▒░▒░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒  m╣▒▒╨▒▒▒▒▒▒▒▒▒▒▒▒▒╢
          ╒╣▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ,`,╓╫▒  `╙╩""]▒▒▒▒▒▒╫
@@ -75,9 +76,7 @@ namespace ConsoleApp1
                 #endregion
 
                 #region Items
-                //TODO Create books and misc items
-                
-                Item testItem = new Item("TestItem", "TestDescription");
+
                 #region Weapons
                 //Starter Weapons, identical stats.
                 Weapon stolenSword = new Weapon("Stolen Sword", "It's better if no one asks where you got this...", WeaponType.IronSword, 10, 1, 6, false);
@@ -96,8 +95,17 @@ namespace ConsoleApp1
                 Weapon blessedSilverSword = new Weapon("Silvered Sword", "This masterwork blade was originally wielded by PLACEHOLDER.", WeaponType.BlessedSilverSword, 25, 5, 10, true);
                 #endregion
 
+                #region Books
+                Book tatteredJournal = new Book("Tattered Journal", "It appears this small, leather-bound book was well used prior to a long exposure to the elements. Most of it is unreadable but the last passage is legible.", "Tattered Journal PLACEHOLDER CONTENT");
                 #endregion
-                
+
+                #region Other Items
+                OtherItem HolyWaterAmulet = new OtherItem("Holy Water Amulet", "Folklore says having this on your person helps ward off undead. Can't hurt to have it, right?", true);
+
+                #endregion
+
+                #endregion
+
                 #region Monsters
                 //TODO Create All Monsters
                 //TODO Create Vampire child class
@@ -114,18 +122,25 @@ namespace ConsoleApp1
 
 
                 #region Rooms
-               
-                //Remember to create RoomLoot list before the room.
-                List<Item> drawBridgeEntranceLoot = new List<Item>() { testItem, ruggedAxe };
-                Room drawBridgeEntrance = new Room("Your Camp / Drawbridge Entrance", "Your camp is here. The castle looms in the distance. The drawbridge is closed and you can see the lever to open it. Nearby lies an old corpse with a tattered leather satchel", drawBridgeEntranceLoot, false, false, false);
 
-                List<Item> mainHallLoot = new List<Item>() { };//empty
+                //Remember to create RoomLoot list before the room.
+                List<Weapon> drawBridgeEntranceWeaponLoot = new List<Weapon>() { ruggedAxe};//empty
+                List<Book> drawBridgeEntranceBookLoot = new List<Book>() { tatteredJournal};//empty
+                List<OtherItem> drawBridgeEntranceOtherLoot = new List<OtherItem>() { HolyWaterAmulet};//empty
+                Room drawBridgeEntrance = new Room("Your Camp / Drawbridge Entrance", "Your camp is here. The castle looms in the distance. The drawbridge is closed and you can see the lever to open it. Nearby lies an old corpse with a tattered leather satchel", drawBridgeEntranceWeaponLoot, drawBridgeEntranceBookLoot, drawBridgeEntranceOtherLoot, false, false, false);
+
+                List<Weapon> mainHallWeaponLoot = new List<Weapon>() { };//empty
+                List<Book> mainHallBookLoot = new List<Book>() { };//empty
+                List<OtherItem> mainHallOtherLoot = new List<OtherItem>() { };//empty
                 Room mainHall = new Room("Main Hall", "This room must have once been magnificent to behold. " +
                     "\nThis room serves to connect residents to many other rooms. " +
-                    "\nIt seems some time ago the massive central chandelier broke free and crashed to the floor.", mainHallLoot, false, false, false); //Some type of easter egg puzzle for the main hall? Or maybe a dev mode weapon
+                    "\nIt seems some time ago the massive central chandelier broke free and crashed to the floor.", mainHallWeaponLoot, mainHallBookLoot, mainHallOtherLoot, false, false, false); //Some type of easter egg puzzle for the main hall? Or maybe a dev mode weapon
                 
                 #endregion
-                List<Item> inventory = new List<Item>(); //needs created before backstory for sword.
+
+                List<Weapon> weaponInventory = new List<Weapon>(); //null initializing player's inventory
+                List<Book> bookInventory = new List<Book>();
+                List<OtherItem> otherInventory = new List<OtherItem>();
                 #region Backstory Selection
 
                 bool exitBackstorySelection = false;
@@ -180,7 +195,7 @@ but you hypothesize it’ll perform it's duty all the same.
                             Console.Clear();
                             Console.WriteLine("You have chosen Fortune Seeker. May you find what you seek.\n");
                             chosenBackstory = PlayerBackstory.FortuneSeeker;
-                            inventory.Add(stolenSword);
+                            weaponInventory.Add(stolenSword);
                             backgroundSword = stolenSword;
                             exitBackstorySelection = true;
                             break;
@@ -190,7 +205,7 @@ but you hypothesize it’ll perform it's duty all the same.
                             Console.Clear();
                             Console.WriteLine("You have chosen Righteous Crusader. Your will shines like a beacon in the dark.\n");
                             chosenBackstory = PlayerBackstory.RighteousCrusader;
-                            inventory.Add(familySword);
+                            weaponInventory.Add(familySword);
                             backgroundSword = familySword;
                             exitBackstorySelection = true;
                             break;
@@ -201,7 +216,7 @@ but you hypothesize it’ll perform it's duty all the same.
                             Console.WriteLine("You have chosen Discredited Scholar. You'll show those stuck up fools you were right " +
                                 "\neven if it's the last thing you do.\n");
                             chosenBackstory = PlayerBackstory.DiscreditedScholar;
-                            inventory.Add(decorativeSword);
+                            weaponInventory.Add(decorativeSword);
                             backgroundSword = decorativeSword;
                             exitBackstorySelection = true;
                             break;
@@ -283,7 +298,7 @@ but names hold power""
 What is your name?: ");
                 string chosenName = Console.ReadLine().Trim();
                 #endregion
-                PlayerCharacter hero = new PlayerCharacter(chosenName, 30, 30, 40, 5, chosenBackstory, chosenClass, backgroundSword, inventory);
+                PlayerCharacter hero = new PlayerCharacter(chosenName, 30, 30, 40, 5, chosenBackstory, chosenClass, backgroundSword, weaponInventory, bookInventory, otherInventory);
                 //TODO Horse's Name? + pet at camp?)
                 
                 //Intro Text:
@@ -291,7 +306,7 @@ What is your name?: ");
                 drawBridgeEntrance.IsCurrentRoom = true;
 
                 #region Camp/DrawbridgeEntrance
-                while (drawBridgeEntrance.IsCurrentRoom)
+                while (drawBridgeEntrance.IsCurrentRoom && !exitApplication)
                 {
 
                     Console.WriteLine(drawBridgeEntrance);
@@ -321,6 +336,7 @@ What is your name?: ");
                         case ConsoleKey.NumPad1:
                             Console.Clear();
                             Console.WriteLine("Viewing inventory method is WIP");
+                            Formatting.ViewHeroInventory(hero);
                             break;
 
                         case ConsoleKey.D2:
@@ -340,7 +356,7 @@ What is your name?: ");
                         case ConsoleKey.D4:
                         case ConsoleKey.NumPad4:
                             Console.Clear();
-                            Formatting.ViewInventory(drawBridgeEntranceLoot, inventory);
+                            Formatting.ViewRoomInventory(hero, drawBridgeEntrance);
                             break;
 
                         case ConsoleKey.D5:
@@ -364,6 +380,7 @@ What is your name?: ");
                                 {
 
                                     Console.WriteLine("It seems the commotion has awoken a swarm of hungry bats!");
+
                                     #region Combat Functionality
 
                                     Monster enemy = batSwarm; //Individualized enemy here
@@ -426,7 +443,8 @@ What is your name?: ");
 
                                             case ConsoleKey.D5://View Inventory
                                             case ConsoleKey.NumPad5:
-                                                Console.WriteLine(inventory);
+                                                Console.WriteLine("Viewing Inventory WIP");
+                                                //Formatting.MethodHere
                                                 break;
 
                                             default:
@@ -496,7 +514,8 @@ What is your name?: ");
                             case ConsoleKey.D1:
                             case ConsoleKey.NumPad1:
                                 Console.Clear();
-
+                                Console.WriteLine("Inventory WIP");
+                                //Formatting.ViewHeroInventory(hero);
 
                                 break;
 

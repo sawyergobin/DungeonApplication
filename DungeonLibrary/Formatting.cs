@@ -57,19 +57,23 @@ namespace DungeonLibrary
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine(input);
             Console.ResetColor();
-        } 
+        }
         #endregion
 
-        #region Room ViewInventory()
+        #region ViewRoomInventory() (and sub methods)
+        //Could use some formatting work
+        
 
-        public static void ViewInventory(List<Item> inputInventory, List<Item> playerInventory) //might be better as an instance method? how to do?
+
+        //ViewRoomWeaponInventory()
+        public static void ViewRoomWeaponInventory(List<Weapon> inputInventory, List<Weapon> playerInventory)
         {
             bool exitLoop = false;
             do
             {
                 Console.WriteLine("You search for any useable items: (Items must be added to inventory to be used)");
 
-                foreach (Item item in inputInventory)
+                foreach (Weapon item in inputInventory)
                 {
                     bool exitItemChoice = false;
                     do
@@ -112,19 +116,160 @@ namespace DungeonLibrary
                                 Console.WriteLine($"{userChoice} was not a valid option, please choose again");
                                 break;
                         }//end switch
+                        
                     } while (!exitItemChoice);
 
                 }//end foreach item loop
                 exitLoop = true;
             } while (!exitLoop);
-        }//end ViewInventory()
+        }
+        
+        //ViewRoomBookInventory()
+        public static void ViewRoomBookInventory(List<Book> inputInventory, List<Book> playerInventory)
+        {
+            bool exitLoop = false;
+            do
+            {
+                Console.WriteLine("You search for any useable items: (Items must be added to inventory to be used)");
+
+                foreach (Book item in inputInventory)
+                {
+                    bool exitItemChoice = false;
+                    do
+                    {
+
+                        Console.WriteLine($"You found: {item.Name}\n" +
+                            $"[1] Examine {item.Name}\n" +
+                            $"[2] Take {item.Name}\n" +
+                            $"[3] Leave {item.Name} where it is");
+                        ConsoleKey userChoice = Console.ReadKey(true).Key;
+
+                        switch (userChoice)
+                        {
+                            case ConsoleKey.D1:
+                            case ConsoleKey.NumPad1:
+                                Console.Clear();
+                                Console.WriteLine("You examine the item: " +
+                                    $"\n{item.Description}" +
+                                    $"\nChoose whether to take or leave it.");
+                                break;
+
+                            case ConsoleKey.D2:
+                            case ConsoleKey.NumPad2:
+                                Console.Clear();
+                                playerInventory.Add(item);
+                                Console.WriteLine($"{item.Name} added to your inventory.");
+                                //inputInventory.Remove(item); TODO figure out how to remove items without RT error?
+                                exitItemChoice = true;
+                                break;
+
+                            case ConsoleKey.D3:
+                            case ConsoleKey.NumPad3:
+                                Console.Clear();
+                                Console.WriteLine($"You leave the {item.Name} where it is.");
+                                exitItemChoice = true;
+                                break;
+
+                            default:
+                                Console.Clear();
+                                Console.WriteLine($"{userChoice} was not a valid option, please choose again");
+                                break;
+                        }//end switch
+
+                    } while (!exitItemChoice);
+
+                }//end foreach item loop
+                exitLoop = true;
+            } while (!exitLoop);
+        }
+
+        //ViewRoomOtherItemInventory()
+        public static void ViewRoomOtherItemInventory(List<OtherItem> inputInventory, List<OtherItem> playerInventory)
+        {
+            bool exitLoop = false;
+            do
+            {
+                Console.WriteLine("You search for any useable items: (Items must be added to inventory to be used)");
+
+                foreach (OtherItem item in inputInventory)
+                {
+                    bool exitItemChoice = false;
+                    do
+                    {
+
+                        Console.WriteLine($"You found: {item.Name}\n" +
+                            $"[1] Examine {item.Name}\n" +
+                            $"[2] Take {item.Name}\n" +
+                            $"[3] Leave {item.Name} where it is");
+                        ConsoleKey userChoice = Console.ReadKey(true).Key;
+
+                        switch (userChoice)
+                        {
+                            case ConsoleKey.D1:
+                            case ConsoleKey.NumPad1:
+                                Console.Clear();
+                                Console.WriteLine("You examine the item: " +
+                                    $"\n{item.Description}" +
+                                    $"\nChoose whether to take or leave it.");
+                                break;
+
+                            case ConsoleKey.D2:
+                            case ConsoleKey.NumPad2:
+                                Console.Clear();
+                                playerInventory.Add(item);
+                                Console.WriteLine($"{item.Name} added to your inventory.");
+                                //inputInventory.Remove(item); TODO figure out how to remove items without RT error?
+                                exitItemChoice = true;
+                                break;
+
+                            case ConsoleKey.D3:
+                            case ConsoleKey.NumPad3:
+                                Console.Clear();
+                                Console.WriteLine($"You leave the {item.Name} where it is.");
+                                exitItemChoice = true;
+                                break;
+
+                            default:
+                                Console.Clear();
+                                Console.WriteLine($"{userChoice} was not a valid option, please choose again");
+                                break;
+                        }//end switch
+
+                    } while (!exitItemChoice);
+
+                }//end foreach item loop
+                exitLoop = true;
+            } while (!exitLoop);
+        }
+
+        //All 3 combined to view total room inventory
+        public static void ViewRoomInventory(PlayerCharacter hero, Room room)
+        {
+            List<Weapon> heroWeapons = hero.WeaponInventory;
+            List<Book> heroBooks = hero.BookInventory;
+            List<OtherItem> heroOtherItems = hero.OtherInventory;
+            List<Weapon> roomWeapons = room.RoomWeaponLoot;
+            List<Book> roomBooks = room.RoomBookLoot;
+            List<OtherItem> roomOtherItems = room.RoomOtherLoot;
+
+            Console.Clear();
+            ViewRoomWeaponInventory(roomWeapons, heroWeapons);
+            Console.Clear();
+            ViewRoomBookInventory(roomBooks, heroBooks);
+            Console.Clear();
+            ViewRoomOtherItemInventory(roomOtherItems, heroOtherItems);
+
+        }
+
+        //Master ViewRoomInventoryMethod
 
         #endregion
 
         #region ViewHeroInventory()
-        //DO NOT USE! STILL WIP!
-        //Each version should probably be its own method unless I can perform branching logic between item types (.GetType()???)
-        public static void ViewHeroInventory(List<Item> heroInventory) 
+        //Needs Formatting Fixes
+        //Needs a ternary operator for If weapon is already equipped!
+
+        public static void ViewHeroInventory(PlayerCharacter hero)
         {
             bool exitLoop = false;
             do
@@ -138,27 +283,27 @@ namespace DungeonLibrary
                 {
 
                     Console.WriteLine("You open your pack to examine your inventory" +
-                        "\nSelect which item type you look at" +
+                        "\nSelect which item type you look at\n" +
                         "[1] Weapons\n" +
                         "[2] Books\n" +
                         "[3] Other Items\n" +
                         "[4] Exit Your Inventory");
 
                     ConsoleKey itemTypeChoice = Console.ReadKey(true).Key;
-                    
+
                     switch (itemTypeChoice)
                     {
                         case ConsoleKey.D1://weapons
                         case ConsoleKey.NumPad1:
                             Console.Clear();
-
+                            exitItemType = true;
                             viewWeapons = true;
                             break;
 
                         case ConsoleKey.D2://books
                         case ConsoleKey.NumPad2:
                             Console.Clear();
-
+                            exitItemType = true;
                             viewBooks = true;
                             break;
 
@@ -186,7 +331,7 @@ namespace DungeonLibrary
                 //Start Weapon Section
                 while (viewWeapons)
                 {
-                    foreach (Weapon item in heroInventory)
+                    foreach (Weapon item in hero.WeaponInventory)
                     {
                         bool exitItemChoice = false;
                         do
@@ -203,14 +348,15 @@ namespace DungeonLibrary
                                 case ConsoleKey.NumPad1:
                                     Console.Clear();
                                     Console.WriteLine("You examine the weapon: " +
-                                        $"\n{item.Description}" +
+                                        $"\n{item}" +
                                         $"\nChoose whether to equip or leave it.");
                                     break;
 
                                 case ConsoleKey.D2:
                                 case ConsoleKey.NumPad2:
                                     Console.Clear();
-                                    //TODO figure this out. Mentoring help??
+                                    hero.EquippedWeapon = (Weapon)item;
+                                    Console.WriteLine($"You stow your other weapon and strap on the {item.Name}");
                                     Console.WriteLine($"{item.Name} is equipped to be used in combat.");
                                     exitItemChoice = true;
                                     break;
@@ -235,7 +381,7 @@ namespace DungeonLibrary
 
                 while (viewBooks)
                 {
-                    foreach (Book item in heroInventory)
+                    foreach (Book item in hero.BookInventory)
                     {
                         bool exitItemChoice = false;
                         do
@@ -246,7 +392,7 @@ namespace DungeonLibrary
                                                 $"[3] Do nothing with {item.Name}");
 
                             ConsoleKey userChoice = Console.ReadKey(true).Key;
-                            //NOTHING PAST THIS IS MODIFIED,
+
                             switch (userChoice)
                             {
                                 case ConsoleKey.D1://examine
@@ -260,7 +406,10 @@ namespace DungeonLibrary
                                 case ConsoleKey.D2:
                                 case ConsoleKey.NumPad2:
                                     Console.Clear();
-                                    Console.WriteLine(item.Contents);
+                                    Console.WriteLine($"You read the book " +
+                                        $"\n{item.Contents}\n" +
+                                        $"Press Any Key to Continue...");
+                                    Console.ReadKey(true);
                                     exitItemChoice = true;
                                     break;
 
@@ -284,34 +433,34 @@ namespace DungeonLibrary
 
                 while (viewOther)
                 {
-                    //WARNING THIS IS JUST A COPY FROM BOOKS! NOT DONE
-                    foreach (Item item in heroInventory)
+                    foreach (OtherItem item in hero.OtherInventory)
                     {
                         bool exitItemChoice = false;
                         do
                         {
                             Console.WriteLine($"You have: {item.Name}\n" +
                                                 $"[1] Examine {item.Name}\n" +
-                                                $"[2] Read {item.Name}\n" +
-                                                $"[3] Do nothing with {item.Name}");
+                                                $"[2] Do nothing with {item.Name}");
 
                             ConsoleKey userChoice = Console.ReadKey(true).Key;
+
                             switch (userChoice)
                             {
                                 case ConsoleKey.D1://examine
                                 case ConsoleKey.NumPad1:
                                     Console.Clear();
-                                    Console.WriteLine("You examine the item: " +
-                                        $"\n{item.Description}");
+                                    Console.WriteLine($"You examine the {item.Name}: " +
+                                        $"\n{item.Description}\n");
                                     break;
-                                    
-                                case ConsoleKey.D3:
-                                case ConsoleKey.NumPad3:
+
+                                case ConsoleKey.D2:
+                                case ConsoleKey.NumPad2:
                                     Console.Clear();
                                     Console.WriteLine($"You leave the {item.Name} in your pack");
                                     exitItemChoice = true;
+                                    exitItemChoice = true;
                                     break;
-
+                                    
                                 default:
                                     Console.Clear();
                                     Console.WriteLine($"{userChoice} was not a valid option, please choose again");
@@ -320,14 +469,13 @@ namespace DungeonLibrary
                         } while (!exitItemChoice);
 
                     }//end foreach item loop 
-                    
                     viewOther = false;
                 }//end viewother
-                
+
                 exitLoop = true;
             } while (!exitLoop);//exiting entire method
         }//end ViewHeroInventory()
-    
+
 
         #endregion
 
@@ -387,6 +535,7 @@ namespace DungeonLibrary
             
         }
 
+        #region Moon
 
         string moon = @"
 
@@ -426,6 +575,7 @@ namespace DungeonLibrary
 ";
 
 
+        #endregion
 
 
 

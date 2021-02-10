@@ -11,27 +11,28 @@ namespace DungeonLibrary
         public PlayerBackstory PlayerBackstory { get; set; }
         public PlayerClass PlayerClass { get; set; }
         public Weapon EquippedWeapon { get; set; }
-        public List<Item> Inventory { get; set; }
+        public List<Weapon> WeaponInventory { get; set; }
+        public List<Book> BookInventory { get; set; }
+        public List<OtherItem> OtherInventory { get; set; }
 
         //ctor
-        public PlayerCharacter(string name, int life, int maxLife, int accuracy, int defense, PlayerBackstory playerBackstory, PlayerClass playerClass, Weapon equippedWeapon, List<Item> inventory) : base(name, life, maxLife, accuracy, defense)
+        public PlayerCharacter(string name, int life, int maxLife, int accuracy, int defense, PlayerBackstory playerBackstory, PlayerClass playerClass, Weapon equippedWeapon, List<Weapon> weaponInventory, List<Book> bookInventory, List<OtherItem> otherInventory) : base(name, life, maxLife, accuracy, defense)
         {
             PlayerBackstory = playerBackstory;
             PlayerClass = playerClass;
             EquippedWeapon = equippedWeapon;
-            Inventory = inventory;
-            //TODO Apply backstory and class stat changes as branching logic
+            WeaponInventory = weaponInventory;
+            BookInventory = bookInventory;
+            OtherInventory = otherInventory;
 
             switch (playerClass) //Class stat mods
             {
                 case PlayerClass.Warrior:
-                    EquippedWeapon.MaxDamage += 2; //will this work with all weapons equipped later? Maybe have this calc in the method or combat.
-                    EquippedWeapon.MinDamage += 2;
                     Defense += 10;
                     break;
 
                 case PlayerClass.Thief:
-                    Accuracy += 15; //Also large def bonus on dodge //TODO Maybe start with health potion?
+                    Accuracy += 15; //Also large def bonus on dodge
                     break;
 
             }
@@ -50,15 +51,30 @@ namespace DungeonLibrary
 
         public override int CalcAccuracy()
         {
+            
             return Accuracy + EquippedWeapon.AccuracyBonus;
+          
         }
 
         public override int CalcDamage()
         {
             Random rand = new Random();
-            int damage = rand.Next(EquippedWeapon.MinDamage, EquippedWeapon.MaxDamage + 1);
-            return damage;
-        }
+            
+            if (PlayerClass == PlayerClass.Warrior)
+            {
+                EquippedWeapon.MinDamage += 2;
+                EquippedWeapon.MaxDamage += 2;
+                int damage = rand.Next(EquippedWeapon.MinDamage, EquippedWeapon.MaxDamage + 1);
+                EquippedWeapon.MinDamage -= 2;
+                EquippedWeapon.MaxDamage -= 2;
+                return damage;
+            }
+            else //for thief
+            {
+                int damage = rand.Next(EquippedWeapon.MinDamage, EquippedWeapon.MaxDamage + 1);
+                return damage;
+            }//end else
+        }//end CalcDamage()
 
-    }
-}
+    }//end class
+}//end namespace

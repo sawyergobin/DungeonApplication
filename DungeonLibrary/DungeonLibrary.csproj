@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Book.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="OtherItem.cs" />
     <Compile Include="PlayerClass.cs" />
     <Compile Include="Creature.cs" />
     <Compile Include="Formatting.cs" />
