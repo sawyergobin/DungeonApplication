@@ -13,7 +13,8 @@ namespace DungeonLibrary
         AntiqueSpear,
         OrnateDagger,
         RuggedAxe,
-        BlessedSilverSword
+        BlessedSilverSword,
+        DevBlade
         
     }
 }

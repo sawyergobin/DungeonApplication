@@ -61,10 +61,8 @@ namespace DungeonLibrary
         #endregion
 
         #region ViewRoomInventory() (and sub methods)
-        //Could use some formatting work
+        //TODO Could use some formatting work
         
-
-
         //ViewRoomWeaponInventory()
         public static void ViewRoomWeaponInventory(List<Weapon> inputInventory, List<Weapon> playerInventory)
         {
@@ -259,7 +257,9 @@ namespace DungeonLibrary
             Console.Clear();
             ViewRoomOtherItemInventory(roomOtherItems, heroOtherItems);
 
-        }
+            Console.WriteLine("No other items seem particularly useful.\n");
+
+        }//end method
 
         //Master ViewRoomInventoryMethod
 

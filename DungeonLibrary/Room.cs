@@ -32,9 +32,11 @@ namespace DungeonLibrary
 
         public override string ToString()
         {
-            return string.Format($"Room: {Name}" +
+            return string.Format($"+++++++++++++++++++++++++++++++++++" +
+                $"\nRoom: " +
+                $"\n{Name}" +
                 $"\nDescription: {Description}" +
-                $"\n");
+                $"\n+++++++++++++++++++++++++++++++++++");
         }
 
         
