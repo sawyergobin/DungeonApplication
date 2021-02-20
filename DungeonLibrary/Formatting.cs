@@ -69,8 +69,9 @@ namespace DungeonLibrary
             bool exitLoop = false;
             do
             {
-                Console.WriteLine("You search for any useable items: (Items must be added to inventory to be used)");
-
+                Console.WriteLine("You search for any useable items: " +
+                    "\n(Items may be equipped, read, or used from your inventory screen)\n");
+                List<Weapon> weaponsToRemove = new List<Weapon>();
                 foreach (Weapon item in inputInventory)
                 {
                     bool exitItemChoice = false;
@@ -98,7 +99,7 @@ namespace DungeonLibrary
                                 Console.Clear();
                                 playerInventory.Add(item);
                                 Console.WriteLine($"{item.Name} added to your inventory.");
-                                //inputInventory.Remove(item); TODO figure out how to remove items without RT error?
+                                weaponsToRemove.Add(item);
                                 exitItemChoice = true;
                                 break;
 
@@ -118,6 +119,10 @@ namespace DungeonLibrary
                     } while (!exitItemChoice);
 
                 }//end foreach item loop
+                foreach (Weapon item in weaponsToRemove)
+                {
+                    inputInventory.Remove(item);
+                }//end removal foreach
                 exitLoop = true;
             } while (!exitLoop);
         }
@@ -128,8 +133,9 @@ namespace DungeonLibrary
             bool exitLoop = false;
             do
             {
-                Console.WriteLine("You search for any useable items: (Items must be added to inventory to be used)");
-
+                Console.WriteLine("You search for any useable items: " +
+                    "\n(Items may be equipped, read, or used from your inventory screen)\n");
+                List<Book> booksToRemove = new List<Book>();
                 foreach (Book item in inputInventory)
                 {
                     bool exitItemChoice = false;
@@ -157,7 +163,7 @@ namespace DungeonLibrary
                                 Console.Clear();
                                 playerInventory.Add(item);
                                 Console.WriteLine($"{item.Name} added to your inventory.");
-                                //inputInventory.Remove(item); TODO figure out how to remove items without RT error?
+                                booksToRemove.Add(item);
                                 exitItemChoice = true;
                                 break;
 
@@ -175,8 +181,11 @@ namespace DungeonLibrary
                         }//end switch
 
                     } while (!exitItemChoice);
-
                 }//end foreach item loop
+                foreach (Book item in booksToRemove)
+                {
+                    inputInventory.Remove(item);
+                }//end removal foreach
                 exitLoop = true;
             } while (!exitLoop);
         }
@@ -184,10 +193,12 @@ namespace DungeonLibrary
         //ViewRoomOtherItemInventory()
         public static void ViewRoomOtherItemInventory(List<OtherItem> inputInventory, List<OtherItem> playerInventory)
         {
+            List<OtherItem> itemsToRemove = new List<OtherItem>();
             bool exitLoop = false;
             do
             {
-                Console.WriteLine("You search for any useable items: (Items must be added to inventory to be used)");
+                Console.WriteLine("You search for any useable items: " +
+                    "\n(Items may be equipped, read, or used from your inventory screen)\n");
 
                 foreach (OtherItem item in inputInventory)
                 {
@@ -216,7 +227,7 @@ namespace DungeonLibrary
                                 Console.Clear();
                                 playerInventory.Add(item);
                                 Console.WriteLine($"{item.Name} added to your inventory.");
-                                //inputInventory.Remove(item); TODO figure out how to remove items without RT error?
+                                itemsToRemove.Add(item);
                                 exitItemChoice = true;
                                 break;
 
@@ -236,6 +247,10 @@ namespace DungeonLibrary
                     } while (!exitItemChoice);
 
                 }//end foreach item loop
+                foreach (OtherItem item in itemsToRemove)
+                {
+                    inputInventory.Remove(item);
+                }//end removal foreach
                 exitLoop = true;
             } while (!exitLoop);
         }
@@ -257,7 +272,7 @@ namespace DungeonLibrary
             Console.Clear();
             ViewRoomOtherItemInventory(roomOtherItems, heroOtherItems);
 
-            Console.WriteLine("No other items seem particularly useful.\n");
+            Console.WriteLine("\nNo other items here seem particularly useful.\n");
 
         }//end method
 
@@ -282,7 +297,10 @@ namespace DungeonLibrary
                 do
                 {
 
-                    Console.WriteLine("You open your pack to examine your inventory" +
+                    Console.WriteLine($"You currently have {hero.Life} health out of {hero.MaxLife} maximum." +
+                        $"\nYou can always return to your campfire to heal." +
+                        "\nYou open your pack to examine your inventory" +
+                        "\nHere you can examine your items, equip weapons, and read books you've picked up" +
                         "\nSelect which item type you look at\n" +
                         "[1] Weapons\n" +
                         "[2] Books\n" +
@@ -310,12 +328,13 @@ namespace DungeonLibrary
                         case ConsoleKey.D3://other items
                         case ConsoleKey.NumPad3:
                             Console.Clear();
-
+                            exitItemType = true;
                             viewOther = true;
                             break;
 
                         case ConsoleKey.D4://exit inventory
                         case ConsoleKey.NumPad4:
+                            Console.Clear();
                             Console.WriteLine("You leave your inventory without examining anything further.");
                             exitLoop = true;
                             break;
@@ -356,15 +375,17 @@ namespace DungeonLibrary
                                 case ConsoleKey.NumPad2:
                                     Console.Clear();
                                     hero.EquippedWeapon = (Weapon)item;
-                                    Console.WriteLine($"You stow your other weapon and strap on the {item.Name}");
-                                    Console.WriteLine($"{item.Name} is equipped to be used in combat.");
+                                    Console.WriteLine($"You take a moment to strap on the {item.Name}");
+                                    Console.WriteLine($"{item.Name} is now equipped to be used in combat." +
+                                        $"\n+++++++++++++++++++++++");
                                     exitItemChoice = true;
                                     break;
 
                                 case ConsoleKey.D3:
                                 case ConsoleKey.NumPad3:
                                     Console.Clear();
-                                    Console.WriteLine($"You leave the {item.Name} in your pack");
+                                    Console.WriteLine($"You leave the {item.Name} in your pack" +
+                                        $"\n+++++++++++++++++++++++");
                                     exitItemChoice = true;
                                     break;
 
@@ -388,7 +409,7 @@ namespace DungeonLibrary
                         {
                             Console.WriteLine($"You have: {item.Name}\n" +
                                                 $"[1] Examine {item.Name}\n" +
-                                                $"[2] Read {item.Name}\n" +
+                                                $"[2] Read the Contents of {item.Name}\n" +
                                                 $"[3] Do nothing with {item.Name}");
 
                             ConsoleKey userChoice = Console.ReadKey(true).Key;
@@ -398,7 +419,7 @@ namespace DungeonLibrary
                                 case ConsoleKey.D1://examine
                                 case ConsoleKey.NumPad1:
                                     Console.Clear();
-                                    Console.WriteLine("You examine the book: " +
+                                    Console.WriteLine($"You examine the {item.Name}: " +
                                         $"\n{item.Description}" +
                                         $"\nChoose whether to read it or leave it be.");
                                     break;
@@ -406,9 +427,11 @@ namespace DungeonLibrary
                                 case ConsoleKey.D2:
                                 case ConsoleKey.NumPad2:
                                     Console.Clear();
-                                    Console.WriteLine($"You read the book " +
-                                        $"\n{item.Contents}\n" +
-                                        $"Press Any Key to Continue...");
+                                    Console.WriteLine($"You read contents of the {item.Name} " +
+                                        $"\n+++++++++++++++++++++++" +
+                                        $"\n{item.Contents}" +
+                                        $"\n+++++++++++++++++++++++" +
+                                        $"\nPress Any Key to Continue...");
                                     Console.ReadKey(true);
                                     exitItemChoice = true;
                                     break;
@@ -416,7 +439,8 @@ namespace DungeonLibrary
                                 case ConsoleKey.D3:
                                 case ConsoleKey.NumPad3:
                                     Console.Clear();
-                                    Console.WriteLine($"You leave the {item.Name} in your pack");
+                                    Console.WriteLine($"You leave the {item.Name} in your pack" +
+                                        $"\n+++++++++++++++++++++++");
                                     exitItemChoice = true;
                                     break;
 
@@ -450,13 +474,15 @@ namespace DungeonLibrary
                                 case ConsoleKey.NumPad1:
                                     Console.Clear();
                                     Console.WriteLine($"You examine the {item.Name}: " +
-                                        $"\n{item.Description}\n");
+                                        $"\n{item.Description}" +
+                                        $"\n+++++++++++++++++++++++");
                                     break;
 
                                 case ConsoleKey.D2:
                                 case ConsoleKey.NumPad2:
                                     Console.Clear();
-                                    Console.WriteLine($"You leave the {item.Name} in your pack");
+                                    Console.WriteLine($"You leave the {item.Name} in your pack" +
+                                        $"\n+++++++++++++++++++++++");
                                     exitItemChoice = true;
                                     exitItemChoice = true;
                                     break;
