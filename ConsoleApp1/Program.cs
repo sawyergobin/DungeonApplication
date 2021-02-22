@@ -111,7 +111,7 @@ trying to find a way into that blasted crypt. I always did hate puzzl....
 with pity instead of hatred. She saw me as I am, stripped of mythos, free of legend, devoid of ominious inferences. 
 I try as I might to honor (""her memory"" is crossed out here) our memories, but it's not the honoring that is difficult. 
 It's the eternity within which I must repeat the same meanial tasks day after day. An eternity of mediocrity, of hunger, of regret and grief that...
-(This exceprt is all that is visible on the ripped parchment)");
+(This excerpt is all that is visible on the ripped parchment)");
 
                 Book paintingInscription = new Book("Inscription on Shredded Painting", "The writing here was written on the back of a canvas in the art gallery. " +
                     "\nThough the painting this came from is not identifiable, it seems the painted side of the canvas is depicting a fine, " +
@@ -214,8 +214,7 @@ Let's simply enjoy the time we have.
                 Monster ancientSpider = new Monster("Giant Spider", 20, 20, 30, 10, @"A very dangerous answer to the very vexing question: ""What made all these webs?""", 4, 8);
                 
                 #endregion
-
-
+                
                 #region Rooms
 
                 //Remember to create RoomLoot list before the room.
@@ -233,7 +232,7 @@ Let's simply enjoy the time we have.
                 List<Book> mainHallBookLoot = new List<Book>() { };
                 List<OtherItem> mainHallOtherLoot = new List<OtherItem>() { };
                 Room mainHall = new Room("Main Hall", "" +
-                    "\nThe once lavish furnishings of this grand entry hall are now decaying and covered in dust and (a frankly impressive amount of) cobwebs " +
+                    "\nThe once lavish furnishings of this grand entry hall are now decaying and covered in dust and (frankly, an impressive amount of) cobwebs " +
                     "\nThis room serves to connect residents to many other rooms. " +
                     "\nIt seems some time ago the massive central chandelier broke free and crashed to the floor." +
                     "\n*You should have seen this place in its heyday*", mainHallWeaponLoot, mainHallBookLoot, mainHallOtherLoot, false, false, false); //DEV MODE WEAPON HERE but NOT in loot list
@@ -294,8 +293,7 @@ something in.
 ", cryptWeaponLoot, cryptBookLoot, cryptOtherLoot, false, false, false);
 
                 #endregion
-
-
+                
                 #region Backstory Selection
 
                 //null initializing player's inventory
@@ -490,8 +488,7 @@ your camp at the castle's gate.
 
                 while (!exitApplication)
                 {
-
-
+                    
                     #region Camp/DrawbridgeEntrance
                     while (drawBridgeEntrance.IsCurrentRoom && !exitApplication)
                     {
@@ -1039,7 +1036,7 @@ steps inside while marvelling at what was once very lavish decor.
                             #endregion
 
                         }//end armor suit combat
-                        while (artGallery.IsCurrentRoom)
+                        while (artGallery.IsCurrentRoom && !exitApplication)
                         {
 
                             if (!artGallery.IsPuzzleComplete)
@@ -1098,7 +1095,7 @@ The plaque hanging beneath it bears only one word:
                                     if (!hero.WeaponInventory.Contains(antiqueSpear))
                                     {
                                         Console.WriteLine("\nIn an alcove displaying several decorative weapons, your eye catches on" +
-                                            "\nan aged brass spear of fine craftsmanship that sport a jagged head. You figure " +
+                                            "\nan aged brass spear of fine craftsmanship that sports a jagged head. You figure " +
                                             "\nthat you might as well save it from an eternity of gathering dust" +
                                             "\nAntique Spear has been added to your inventory");
                                         hero.WeaponInventory.Add(antiqueSpear);
@@ -1232,7 +1229,7 @@ It does not look happy to see you. In fact it looks rather hungry.");
                         }//end spider fight
                         while (oldLibrary.IsCurrentRoom && !exitApplication)
                         {
-
+                            Console.WriteLine(oldLibrary);
                             if (!oldLibrary.IsPuzzleComplete)
                             {
                                 Console.WriteLine(@"
