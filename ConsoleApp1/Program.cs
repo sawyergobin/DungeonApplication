@@ -17,71 +17,23 @@ namespace ConsoleApp1
             {
                 string applicationTitle = "The Dead of the Night";
                 Formatting.Header(applicationTitle);
-                
+
                 #region TitleCard
-                Console.WriteLine(@" 
+                Formatting.DisplayTitleCard();
 
-    ▄▄▄▄▀ ▄  █ ▄███▄       ██▄   ▄███▄   ██   ██▄       ████▄ ▄████         ▄▄▄▄▀ ▄  █ ▄███▄          ▄   ▄█   ▄▀   ▄  █    ▄▄▄▄▀ 
- ▀▀▀ █   █   █ █▀   ▀      █  █  █▀   ▀  █ █  █  █      █   █ █▀   ▀     ▀▀▀ █   █   █ █▀   ▀          █  ██ ▄▀    █   █ ▀▀▀ █    
-     █   ██▀▀█ ██▄▄        █   █ ██▄▄    █▄▄█ █   █     █   █ █▀▀            █   ██▀▀█ ██▄▄        ██   █ ██ █ ▀▄  ██▀▀█     █    
-    █    █   █ █▄   ▄▀     █  █  █▄   ▄▀ █  █ █  █      ▀████ █             █    █   █ █▄   ▄▀     █ █  █ ▐█ █   █ █   █    █     
-   ▀        █  ▀███▀       ███▀  ▀███▀      █ ███▀             █           ▀        █  ▀███▀       █  █ █  ▐  ███     █    ▀      
-           ▀                               █                    ▀                  ▀               █   ██            ▀            
-                                         ▀       
-                                          ,,,,,,,                                                               '
-                                ,╖@╫╢▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒╬@╦╓,                           .                '               
-                           ┌@╢▒▒▒▒▒▒▒▒▒▒░░░░░░╜▒▒▒▒▒▒▒▒▒▒╢╣▓%╖        `                      `            '   
-                       ,╦╣▒▒▒░░░░░░░▒▒▒▒░░░░░░░░░░░▒▒▒░▒▒▒╢╣╫╢▒▓N,           '                   '                    
-                    ,╗╣▒▒▒▒▒░░░░░░░▒▒▒▒░░░░░░░░░░░░▒▒▒▒▒▒▒╣╢╢╫╣╫╢▒▒@,      '        `      `           '             
-                  ┌╬▒▒▒▒▒▒▒▒▒░░░▒▒╢▒▒▒░░▒░░░░░░░░▒@╣╢▒╫▒▒▒▒╢▒╢▒▒▒╢╢▒▒╣╖               `           '             
-                ┌╣▒▒▒▒▒▒▒▒▒▒▒▒▒▒╢▒▒▒░░░░░░░░▒▒▒▒▒▒▒▒░░░░░▒▒▒▒▒▒▒▒▒▒╢╢▒▒╣w      '             '                  
-              ,╣▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░▒▒▒▒▒▒▒▒░░░▒░▒▒▒▒▒▒▒▒  ╣╢╢▒▒▓,            `          '
-             ╓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒╢▒▒▒▒▒▒▒▒▒ ╢▒▒╢▒╢▒╣@                 '
-            ╫▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░▒░▒▒▒▒▒╢╣▒▒▒▒╢▒▒▒▒    ▒▒▒╢▒▒▓         `          .
-           ╣▒▒▒▒▒▒▒▒▒▒░░░░▒░▒░░░░░░░░░░░░░░░░░░▒▒╢▒▒╣▒▒▒,   ╣▒▒▒╣▒▒▒▒▒▒▒▒▒▒▒▒╢ `           . 
-          Æ╢▒╢╣▒▒▒▒▒▒░▒░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒  m╣▒▒╨▒▒▒▒▒▒▒▒▒▒▒▒▒╢
-         ╒╣▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ,`,╓╫▒  `╙╩""]▒▒▒▒▒▒╫
-         ╢╢╣╣▒▒░░▒░░░▒░░▒░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒▒▒▒@╗     ╣▒▒▒▒L
-        ]▒▒▒▒▒▒░░░░╜(▒▒▒▒░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒╬   ,╙▒▒▒▒▒▒▒▒▒▒▓╣▒╢▒╣▒▒▒▒╫
-        ║▒▒▒▒▒▒░░░▒▒`╓╖▒▒░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒[]▒▒, ╫╣▓▒╢▒╢▒▒╢▒╢▒▒╢▒
-        ▒▒▒▒▒▒▒░░░▒ ╨╥╥'m▒▒░░░░░░░░░░░░░░░░░░▒░░░░▒╜▒   ░▒▒▒▒▒▒▒▒▒╦@╗▓╣╣╢╣▒▒╢╣▒▒╢▒⌐
-        ▒▒▒▒▒▒▒▒░░░▒;=""╙ ╓░░░░░▒░░░▒▒▒░░░░░░░░░░░▒∩─┐  ,,,▒▒▒▒░░░░▒▒▒╢╢▒▒╣▒╢╣▒▒▒▒L
-        ]▒▒▒▒▒▒░░░░▒▒▒`. └▒░░░░░░░░░░░░░░░░░░░░░`▒░░▒▒▒░░ ░░    ▒▒▒▒░▒▒▒▒▒▒▒▒▒▒▒▒▒`
-         ▒▒▒▒▒▒░░░░▒░░░,  ▒░░░░░░▒`░░░░░░░░░░░ ░. ""▒▒▒░░     ░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒
-         ▒▒▒▒▒░▒░░░░▒░░░  ░░░░░░░  ░░░░░░░░ ,▒░░░░,─, ,░░░░░▒░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒╜
-          ▒▒▒▒░░░░░▒░░░░  ,""░░,`  ,'░░░░░░░'▒░░,``▒░▒``▒░░░░░░░░░░░░░░░▒░▒▒▒░▒░▒
-          '░░▒▒░░░░░▒ ``  ',,    ,  ░░░░░▒`▒▒▒░░▒╖  ,─░░░░░░░░░░░░░░░░░▒▒▒▒░░░░`
-            ¡'▒░░░░▒▒▒╖.    ░:;        `*─ ]░░▒░░░░░░░░░,░░░░░░░░░░░░░░░░░░░░░'
-            `░.,]░░░░░░░░            └ ,'    ∩░,, ░░░░░░░░░` ░░░`  `░░░░░░░░░`
-               `` ░░░░░░,,░`     '~;  `  ─░░ '░░░``'░`░░` ` ░░░ `  ░░░░░░░░░
-                    '░░░░░░░░,   :,        ░░░░░░`.░ ``   .░░░░░,,░░░▒░░░░`
-                   '   `  ░░░░     `'    '░░░░░░░  ``'`````░░'²░░░░░░░░░
-                                           '````   `   ` `' .,░░░░░░░'
-                                         `             `   '░░░░░░░
-                                                         ¡:░''
-                                                        '  `
-   __          __                 ___  __      __   __   __         
-  |__) \ /    /__`  /\  |  | \ / |__  |__)    / _` /  \ |__) | |\ | 
-  |__)  |     .__/ /~~\ |/\|  |  |___ |  \    \__> \__/ |__) | | \|  2021
-                                                                  
-                      Please play in fullscreen 
-
-                      Press any key to begin!
-     
-");
                 Formatting.MainTheme();
                 Console.ReadKey(true);
+
                 #endregion
 
                 #region Items
 
                 #region Weapons
-                //Starter Weapons, identical stats.
+                //Starter Weapons, identical stats, different flavors.
                 Weapon stolenSword = new Weapon("Stolen Sword", "It's better if no one asks where you got this...", WeaponType.IronSword, 10, 1, 6, false);
                 Weapon familySword = new Weapon("Family Sword", "It's old and well used. It has served your family for 3 generations now.", WeaponType.IronSword, 10, 1, 6, false);
                 Weapon decorativeSword = new Weapon("Decorative Sword", "Intended to be buried with a warrior, not used in combat. But the blade is sharp and the tip still stabs.", WeaponType.IronSword, 10, 1, 6, false);
-                Weapon ironSword = new Weapon("Iron Sword", "Your trusty iron sword, but it's nothing fancy", WeaponType.IronSword, 10, 1, 6, false);
-                //Iron Sword is a placeholder default weapon.
+                Weapon ironSword = new Weapon("Iron Sword", "Placeholder starter sword", WeaponType.IronSword, 10, 1, 6, false);
 
                 Weapon ruggedAxe = new Weapon("Rugged Axe", "It's seen heavy use, but this axe's sturdy construction has held thus far.", WeaponType.RuggedAxe, 5, 2, 7, false);
                 Weapon ornateDagger = new Weapon("Ornate Dagger", "A small blade of masterful crafstmanship. Its handle and blade are inlaid with gold." +
@@ -98,10 +50,13 @@ namespace ConsoleApp1
                 #region Books
                 Book tatteredJournal = new Book("Tattered Journal", "It appears this small, leather-bound book was well used prior to a long exposure to the elements. Most of it is unreadable but the last passage is legible.", @"
 ...and I think it was poisonous, it's the only explanation... 
++++++++++++++++++++++++++++++++++++++++++++++++++++
 (the text here is stained with blood and illegible)
++++++++++++++++++++++++++++++++++++++++++++++++++++
 ...thought this stupid amulet would be good luck but this ""luck"" feels a lot like dying.
 I guess technically I never got bitten by a vamp, but I also never saw a vamp, just wandered around
 trying to find a way into that blasted crypt. I always did hate puzzl....
+
 (the writing trails off down the page as if the writer's hand fell. There are no further entries)
 ");
                 
@@ -111,7 +66,8 @@ trying to find a way into that blasted crypt. I always did hate puzzl....
 with pity instead of hatred. She saw me as I am, stripped of mythos, free of legend, devoid of ominious inferences. 
 I try as I might to honor (""her memory"" is crossed out here) our memories, but it's not the honoring that is difficult. 
 It's the eternity within which I must repeat the same meanial tasks day after day. An eternity of mediocrity, of hunger, of regret and grief that...
-(This excerpt is all that is visible on the ripped parchment)");
+(This excerpt is all that is visible on the ripped parchment.
+The note is penned in a refined handwriting style)");
 
                 Book paintingInscription = new Book("Inscription on Shredded Painting", "The writing here was written on the back of a canvas in the art gallery. " +
                     "\nThough the painting this came from is not identifiable, it seems the painted side of the canvas is depicting a fine, " +
@@ -123,7 +79,8 @@ It's the eternity within which I must repeat the same meanial tasks day after da
                     "\nfrom moonrise to sunrise. Here's to 35 more!" +
                     "\nWith Love," +
                     "\n--Your Eleanor" +
-                    "\n(It is dated with a date exactly 49 years ago from today's date, to the exact day)");
+                    "\n(It is dated with a date exactly 49 years ago from today's date, to the exact day." +
+                    "\nThe inscription is penned in a scratchy handwriting style.)");
 
                 Book oldPoem = new Book("Old Poem", "This poem is written on an old and brittle piece of parchment. It was penned in a refined handwriting style", @"
 A Dead walked in the night
@@ -170,7 +127,8 @@ The Dead now reigns eternal here
 
 (The poem is unsigned and untitled. It's worth noting that the 
 locals refer to the nearby mountain lake as Predyn's Mere.
-It feels too close to be a coincidence. Perhaps the name changed over time?)
+It feels too close to be a coincidence. Perhaps the name changed over time?
+The poem is penned in a refined handwriting style)
 ");
 
                 Book burnedNote = new Book("Half-Burned Note", "It seems someone tried to burn this note in a fireplace but a stray draft of wind saved this legible portion of text." +
@@ -178,12 +136,15 @@ It feels too close to be a coincidence. Perhaps the name changed over time?)
 ...understand now what you meant. I'm sorry for how I acted and I'd like to ask your forgiveness. 
 You said you couldn't (or wouldn't) condemn me to an enternity of torment. 
 And I listened.
+
 You remarked: ""Something isn't beautiful only because it lasts, it's in fact quite the opposite.""
 And I thought deeply about it.
+
 You declared that I wanted what everyone wants: ""To be loved unconditionally and all-consumingly.""
 And I knew in my heart you spoke the truth. 
 And I knew you already had that love for me.
 I knew you spoke from kindness and love, not from the fear I drew on.
+
 Thank you.
 
 So please, Amadeus, you don't have to worry about my temptations anymore. Let's just live and love 
@@ -193,6 +154,7 @@ Let's simply enjoy the time we have.
 
 -E...
 
+(The note is penned in a scratch handwriting style)
 ");
                 #endregion
 
@@ -207,7 +169,7 @@ Let's simply enjoy the time we have.
                 #endregion
 
                 #region Monsters
-                //TODO Create All Monsters
+
                 Monster batSwarm = new Monster("Swarm of Bats", 10, 10, 30, 5, "This swarm of hungry bats works together with a " +
                     "\ncohesion that seems nearly sentient", 1, 4);
                 Monster armorSuit = new Monster("Animated Armor", 14, 14, 35, 20, "It doesn't technically have an expression but you infer it looks angry.", 2, 6);
@@ -217,7 +179,7 @@ Let's simply enjoy the time we have.
                 
                 #region Rooms
 
-                //Remember to create RoomLoot list before the room.
+                //RoomList needs to be created before the room
                 List<Weapon> drawBridgeEntranceWeaponLoot = new List<Weapon>() { ruggedAxe};
                 List<Book> drawBridgeEntranceBookLoot = new List<Book>() { tatteredJournal};
                 List<OtherItem> drawBridgeEntranceOtherLoot = new List<OtherItem>() { HolyWaterAmulet};
@@ -307,17 +269,29 @@ something in.
                 do
                 {
                     Console.Clear();
-                    Console.WriteLine($"Welcome to -{applicationTitle}-, player!  \n\nTo play this game, please you select with your number keys from a series of choices presented to you. \n\nIn this adventure you take on the role of a character who has sought out the rumored lair of an infamous vampire lord known as " +
-                        $"\nAmadeus the Cruel. " +
-                        $"\nYour objective is to battle and defeat the nefarious undead. \nSurely this task will prove neither simple nor easy, but your motivations for undertaking it are your own. " +
-                        $"\nChoose one of the following backstories to determine your character's history and motivations. " +
-                        $"\n\nIn other words: Who are you?");
+                    Console.WriteLine(
+                        $"Welcome to -{applicationTitle}-, player!  " +
+                        "\n\nTo play this game, you select with your number keys ([1], [2], [3], etc.) from a series of choices presented to you. " +
+                        "\n\nIn this adventure you take on the role of a character who has sought out the rumored lair of an infamous vampire lord known as ");
+                    Formatting.RedText(@"
++++++++++++++++++++
+Amadeus The Cruel
++++++++++++++++++++
+");
+                    Console.WriteLine(
+                        "Your objective is to battle and defeat the nefarious undead. " +
+                        "\nSurely this task will prove neither simple nor easy, but your motivations for undertaking it are your own." +
+                        "\n\nPress any Key to Continue...");
+                    Console.ReadKey(true);
+                    Console.Clear();
+                    Console.WriteLine("\nChoose one of the following backstories to determine your character's history and motivations. " +
+                        "\n\nIn other words: Who are you?");
                     Console.WriteLine(@"
 +++++++++++++++
 |Fortune Seeker:
 +++++++++++++++
 You grew up a nobody and have always been treated as such. 
-That’s about to change. Marlon's terrible reign has gone on far 
+That’s about to change. The reign of Amadeus has lasted far 
 too long, and the hero that kills him will instantly become a legend.
 Hopefully if you secure ""fame"" then ""fortune"" falls right into place. 
 And now all that stands in your way is a musty old undead. 
@@ -579,19 +553,7 @@ your camp at the castle's gate.
                                         bool exitFight = false;
                                         do
                                         {
-                                            Console.WriteLine(@"A Swarm of Bats is attacking you!
- ____.                            .____               
-  ..'     ''\                      /''     '..
-.'     .. . .'\.                ./. .  ..     '.
- ')__.'  ...    '.)          (.'    ...  '.__('
-  '  )_.'     .   :          :   .     '._(  '
-       )_.__.'    '.        .'    '.__._(
-            )__.'   '.    .'   '.__(        
-            '   \._..:^::^:.._./   '
-                 '   :o..o:   '
-                    .:'!!':.
-                    ''    ''
-");
+                                            Formatting.DisplayBatSwarm();
                                             Console.WriteLine($"Choose an Action:" +
                                                 $"\n[1] Attack the {enemy.Name}" +
                                                 $"\n[2] Flee (Enemy will attempt to attack)" +
@@ -953,6 +915,7 @@ steps inside while marvelling at what was once very lavish decor.
                             bool exitFight = false;
                             do
                             {
+                                Formatting.DisplayArmorSuit();
                                 Console.WriteLine($"Choose an Action:" +
                                     $"\n[1] Attack the {enemy.Name}" +
                                     $"\n[2] Flee (Enemy will attempt to attack)" +
@@ -1155,6 +1118,7 @@ It does not look happy to see you. In fact it looks rather hungry.");
                             bool exitFight = false;
                             do
                             {
+                                Formatting.DisplaySpider();
                                 Console.WriteLine($"Choose an Action:" +
                                     $"\n[1] Attack the {enemy.Name}" +
                                     $"\n[2] Flee (Enemy will attempt to attack)" +
@@ -1477,8 +1441,9 @@ and inlaid with pearl:
                 }//end MAIN GAME loop
                 
             } while (!exitApplication);
+            //end ENTIRE Game Loop
+
             
-            //TODO rand gen the end screen?
             #region Game Over
             Formatting.GameOverTheme();
             Console.WriteLine(@"
