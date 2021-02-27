@@ -19,7 +19,7 @@ namespace ConsoleApp1
                 Formatting.Header(applicationTitle);
 
                 #region TitleCard
-                Formatting.DisplayTitleCard();
+                Formatting.DisplayTitleCard(); //Titlecard art stored in Formatting Class and called with this method
 
                 Formatting.MainTheme();
                 Console.ReadKey(true);
@@ -27,7 +27,7 @@ namespace ConsoleApp1
                 #endregion
 
                 #region Items
-
+                //Creating the items here to distribute them to room inventories later
                 #region Weapons
                 //Starter Weapons, identical stats, different flavors.
                 Weapon stolenSword = new Weapon("Stolen Sword", "It's better if no one asks where you got this...", WeaponType.IronSword, 10, 1, 6, false);
@@ -264,7 +264,7 @@ something in.
                 List<OtherItem> otherInventory = new List<OtherItem>();
 
                 bool exitBackstorySelection = false;
-                PlayerBackstory chosenBackstory = new PlayerBackstory();//Null initialization
+                PlayerBackstory chosenBackstory = new PlayerBackstory();//Null initialization to be reassigned later
                 Weapon backgroundSword = ironSword;
                 do
                 {
@@ -368,7 +368,7 @@ but you hypothesize it’ll perform it's duty all the same.
 
                 #region Class Selection
                 //TODO class selection process:
-                PlayerClass chosenClass = new PlayerClass();//null initialization
+                PlayerClass chosenClass = new PlayerClass();//null initialization to be reassigned later
                 bool exitClassSelection = false;
 
                 do
@@ -426,10 +426,13 @@ When you attack, you do so with unerring accuracy and if you must flee, your lig
                 #endregion
 
                 #region Name Selection
-                Console.Write(@"A great philosopher once said,
+                Console.Write(@"
+A great philosopher once said,
 
++++++++++++++++++++++++++++
 ""Words may hold meaning
 but names hold power"" 
++++++++++++++++++++++++++++
 
 What is your name?: ");
                 string chosenName = Console.ReadLine().Trim();
@@ -438,25 +441,26 @@ What is your name?: ");
                 #region Introduction
 
                 PlayerCharacter hero = new PlayerCharacter(chosenName, 30, 30, 40, 5, chosenBackstory, chosenClass, backgroundSword, weaponInventory, bookInventory, otherInventory);
-                //TODO Horse's Name? + pet at camp?)
-
+                
                 //Intro Text:
-                Console.Clear();//Some mountain ascii art here?
+                Console.Clear();//Maybe some ascii art here of a mountain or river?
                 Console.WriteLine(@"
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Your journey to reach the dreaded castle takes just over 2 weeks from the nearest 
-town. Even after scaling the mountain that the castle is built upon, an unpassably
+town. 
+Even after scaling the mountain that the castle is built upon, an unpassably
 wide river with a strong current forces you to change course several times. 
-The weather shifts from biting cold to downright dreadful during your last days of travel
-and when you finally glimpse the keep's silhouette it's through a curtain of snowfall.
+
+The weather shifts from biting cold to dangerously freezing during your last days of travel
+and when you finally glimpse the structure's silhouette it's through a sheer curtain of snowfall.
 Luckily you packed warm and plenty of extra rations.
 
-Your journey was the most arduous one of your life but you finally make 
-your camp at the castle's gate.
+This journey was the most arduous one of your life but you finally strike flint on steel
+to begin making your camp at the castle's gate.
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ");
-                drawBridgeEntrance.IsCurrentRoom = true;
+                drawBridgeEntrance.IsCurrentRoom = true; //enter into MAIN Game loop with a current room designation
 
                 #endregion
 
@@ -507,7 +511,7 @@ your camp at the castle's gate.
                             case ConsoleKey.D3:
                             case ConsoleKey.NumPad3:
                                 Console.Clear();
-                                Formatting.DisplayCastleArt();//Randomize response here?
+                                Formatting.DisplayCastleArt(); //Perhaps a randomized response here?
                                 Console.WriteLine("You look at the castle and feel apprehensive of what's to come.");
                                 break;
 
@@ -547,7 +551,7 @@ your camp at the castle's gate.
 
                                         Monster enemy = batSwarm; //Individualized enemy here
                                         Console.WriteLine($"A {enemy.Name} is attacking you! Get ready to fight!"); //Customize per encounter
-                                        Console.WriteLine("Press any button to begin the fight!");//Pics maybe?
+                                        Console.WriteLine("Press any button to begin the fight!");
                                         Console.ReadKey(true);
 
                                         bool exitFight = false;
@@ -662,7 +666,7 @@ your camp at the castle's gate.
                             if (hero.OtherInventory.Contains(HolyWaterAmulet))
                             {
                                 Console.WriteLine(@"
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 You press open the heavy castle doors and enter the main hall.
 You take a few steps inside, marvelling at what was once very lavish decor.
 Your marvelling is cut short by the hair on the back of your neck standing up as you
@@ -695,16 +699,18 @@ so make yourself at home, I suppose.
 I'm sure the castle will deal with you swiftly,"" he says.
 
 With that, he turns to ascend the spiraling staircase.
-You run after him but by the time to reach the stairs, you hear a heavy door closing
-and locking at the top of the stairs.
+You run after him but by the time to reach the stairs, you hear the flapping of small, leathery
+wings and can see the form of a bat shrinking in the distance.
+
+Perhaps exploring his castle will help you find a way to defeat the cowardly undead.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Press Any Key to Continue...
 ");
                                 Console.ReadKey(true);
                                 Console.Clear();
-                                //TODO Diologue Option here?
                                 HolyWaterAmulet.HasBeenUsed = true;
-                                HolyWaterAmulet.Description = "Wearing this seems to stop the vampire from biting you. But he seems plenty able of killing you many other ways.";
+                                HolyWaterAmulet.Description = "Wearing this seems to stop the vampire from biting you. But he seems plenty able of killing you many other ways."; //item description updated
                                 mainHall.IsMonsterDead = true;
                             }//end inventorycontainsamulet if branch
                             else
@@ -718,7 +724,7 @@ steps inside while marvelling at what was once very lavish decor.
                                     "\nAfter a moment of struggling to free yourself, your strength has seeped from your body and your eyes begin to close." +
                                     "\nYour body crumples to the floor and that last of your life fades as you glimpse a well-dressed figure wiping the blood from their lips with an embroidered kerchief." +
                                     "\n\nYou have died." +
-                                    "\n*While waltzing in the front door unprepared is brave, it seems it was also quite foolish.*");//Kicked the bucket
+                                    "\n*While waltzing in the front door unprepared is brave, it seems it was also quite foolish.*");//Kicked the bucket, RIP
                                 exitApplication = true;
                             }
 
@@ -904,7 +910,7 @@ steps inside while marvelling at what was once very lavish decor.
                                 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" +
                                 "\nAs you take your first steps into the room, the suit of armor draws its sword and attacks!" +
                                 "\n*I guess offense really is the best defense*" +
-                                "\nPress Any Key to begin the fight!" +
+                                "\n\nPress Any Key to begin the fight!" +
                                 "\n");
                             Console.ReadKey(true);
 
@@ -1052,7 +1058,8 @@ clear that each piece is by the same artist. A collection of this many pieces mu
 to accrue. One theme unites all the art pieces: the expert contrast of light and dark.
 The piece occupying the central alcove is a life-sized portrait of the vampire you just met
 in the Main Hall. In the painting he regards the viewer with a kindly smile.
-The plaque hanging beneath it bears only one word: 
+The plaque hanging beneath it bears only one word:
+
 ""Amadeus""
 ");
                                     if (!hero.WeaponInventory.Contains(antiqueSpear))
@@ -1112,13 +1119,13 @@ It does not look happy to see you. In fact it looks rather hungry.");
 
                             Monster enemy = ancientSpider; //Individualized enemy here
                             Console.WriteLine($"An {enemy.Name} is attacking you! Get ready to fight!"); //Customize per encounter
-                            Console.WriteLine("Press any button to begin the fight!");//Pics maybe?
+                            Console.WriteLine("Press any button to begin the fight!");
                             Console.ReadKey(true);
 
                             bool exitFight = false;
                             do
                             {
-                                Formatting.DisplaySpider();
+                                Formatting.DisplaySpider();//Spider Art Method
                                 Console.WriteLine($"Choose an Action:" +
                                     $"\n[1] Attack the {enemy.Name}" +
                                     $"\n[2] Flee (Enemy will attempt to attack)" +
@@ -1410,6 +1417,8 @@ and inlaid with pearl:
                                 else
                                 {
                                     Console.WriteLine("You step through the open doors into the tomb beyond");
+                                    Console.WriteLine("TOMB is WIP, thank you for getting this far!" +
+                                        "\nTis a fearful thing: to love that which death can touch");
                                     crypt.IsCurrentRoom = false;
                                     //tomb.IsCurrentRoom = true;
                                 }
@@ -1429,20 +1438,15 @@ and inlaid with pearl:
                                 Console.WriteLine($"{roomMenuChoice} was not a valid option. Select again");
                                 break;
                         }
-
-
-
-
+                        
                     }//end crypt room
-
-
+                    
                     #endregion
 
                 }//end MAIN GAME loop
                 
             } while (!exitApplication);
             //end ENTIRE Game Loop
-
             
             #region Game Over
             Formatting.GameOverTheme();
