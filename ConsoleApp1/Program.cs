@@ -1418,6 +1418,8 @@ and inlaid with pearl:
                                 {
                                     Console.WriteLine("You step through the open doors into the tomb beyond");
                                     Console.WriteLine("TOMB is WIP, thank you for getting this far!" +
+                                        "\nPlease let me know what you liked (or didn't like) about the experience so far!" +
+                                        "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++" +
                                         "\nTis a fearful thing: to love that which death can touch");
                                     crypt.IsCurrentRoom = false;
                                     //tomb.IsCurrentRoom = true;
