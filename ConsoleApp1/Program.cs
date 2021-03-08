@@ -159,7 +159,7 @@ Let's simply enjoy the time we have.
                 #endregion
 
                 #region Other Items
-                OtherItem HolyWaterAmulet = new OtherItem("Holy Water Amulet", "Folklore says having this on your person helps ward off undead. Can't hurt to have it, right?", false);
+                OtherItem holyWaterAmulet = new OtherItem("Holy Water Amulet", "Folklore says having this on your person helps ward off undead. Can't hurt to have it, right?", false);
                 OtherItem darkRedWine = new OtherItem("Dark Red Wine", @"The wine in this bottle seems thicker and darker than even the most ""robust"" wines you've seen. It looks almost like it's filled with... blood.", false);
                 OtherItem weddingRing = new OtherItem("Golden Wedding Ring", "The inscription inside the band reads: Together in Love, As Long As A Life", false);
                 OtherItem lantern = new OtherItem("Wrought Iron Lantern", "The iron housing of this latern is made of tiny heart patterns. The flame inside burns continuously even without fuel.", false);
@@ -182,7 +182,7 @@ Let's simply enjoy the time we have.
                 //RoomList needs to be created before the room
                 List<Weapon> drawBridgeEntranceWeaponLoot = new List<Weapon>() { ruggedAxe};
                 List<Book> drawBridgeEntranceBookLoot = new List<Book>() { tatteredJournal};
-                List<OtherItem> drawBridgeEntranceOtherLoot = new List<OtherItem>() { HolyWaterAmulet};
+                List<OtherItem> drawBridgeEntranceOtherLoot = new List<OtherItem>() { holyWaterAmulet};
                 Room drawBridgeEntrance = new Room("Your Camp / Drawbridge Entrance", "" +
                     "\nYour campfire is here, a welcome respite from the freezing cold. " +
                     "\nThe castle looms in the distance. " +
@@ -252,7 +252,15 @@ Beside the stone doors is an etching in the wall, surrounded by a decorative flo
 design.
 Adjacent to the eching are 3 oval-shaped alcoves that seem large enough to set
 something in.
+*Is a simple doorknob too much to ask for?*
 ", cryptWeaponLoot, cryptBookLoot, cryptOtherLoot, false, false, false);
+
+                List<Weapon> tombWeaponLoot = new List<Weapon> () {};
+                List<Book> tombBookLoot = new List<Book> () {};
+                List<OtherItem> tombOtherLoot = new List<OtherItem>() { };
+                Room tomb = new Room("Resplendent Tomb", 
+                    @"", tombWeaponLoot, tombBookLoot, tombOtherLoot, false, false, false
+                    );
 
                 #endregion
                 
@@ -663,7 +671,7 @@ to begin making your camp at the castle's gate.
 
                         if (!mainHall.IsMonsterDead)
                         {
-                            if (hero.OtherInventory.Contains(HolyWaterAmulet))
+                            if (hero.OtherInventory.Contains(holyWaterAmulet))
                             {
                                 Console.WriteLine(@"
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -709,8 +717,8 @@ Press Any Key to Continue...
 ");
                                 Console.ReadKey(true);
                                 Console.Clear();
-                                HolyWaterAmulet.HasBeenUsed = true;
-                                HolyWaterAmulet.Description = "Wearing this seems to stop the vampire from biting you. But he seems plenty able of killing you many other ways."; //item description updated
+                                holyWaterAmulet.HasBeenUsed = true;
+                                holyWaterAmulet.Description = "Wearing this seems to stop the vampire from biting you. But he seems plenty able of killing you many other ways."; //item description updated
                                 mainHall.IsMonsterDead = true;
                             }//end inventorycontainsamulet if branch
                             else
@@ -1322,11 +1330,11 @@ You see the following carved into the smooth stone wall
 and inlaid with pearl:
 
 ****************************************************
-* With this wine, I shall fill thine cup daily.     *      
+*   With this wine, I shall fill thine cup daily.   *      
 ***                                               ***     
 * With this lantern, I light thine way in the dark. *         
 ***                                               ***          
-* With this ring, you shall be mine till death      *    
+*   With this ring, you shall be mine till death.   *    
 ****************************************************
 ");
                                     if (hero.OtherInventory.Contains(darkRedWine))
@@ -1344,6 +1352,20 @@ and inlaid with pearl:
                                     if (crypt.RoomOtherLoot.Contains(darkRedWine) && crypt.RoomOtherLoot.Contains(lantern) && crypt.RoomOtherLoot.Contains(weddingRing))
                                     {
                                         Console.WriteLine("All 3 items are in their alcoves. The doors to the Tomb are now open.");
+                                        crypt.Description = @"
+You find yourself in the dimly lit undergound of the castle.
+This room is wide and has several columns presumably supporting the castle above.
+A single set of smooth stone doors is here. The doors have no handle, lever, knob 
+or other clear way of opening them.
+++The doors are wide open and you can see a narrow hallway beyond them
+
+Beside the stone doors is an etching in the wall, surrounded by a decorative floral
+design.
+Adjacent to the eching are 3 oval-shaped alcoves that seem large enough to set
+something in.
+++The Wine, the Ring, and the Lantern are all here in their alcoves.
+
+*Maybe this tomb holds the secrets to defeating Amadeus*";
                                         crypt.IsPuzzleComplete = true;
                                     }
 
@@ -1376,7 +1398,7 @@ and inlaid with pearl:
                                             {
                                                 hero.OtherInventory.Remove(lantern);
                                                 crypt.RoomOtherLoot.Add(lantern);
-                                                Console.WriteLine("You place the lantern into an alcove and small draft of air rushes past you");
+                                                Console.WriteLine("You place the lantern into an alcove and chill tingles across your scalp");
                                             }
                                             else
                                             {
@@ -1389,7 +1411,7 @@ and inlaid with pearl:
                                             {
                                                 hero.OtherInventory.Remove(weddingRing);
                                                 crypt.RoomOtherLoot.Add(weddingRing);
-                                                Console.WriteLine("You place the ring into an alcove and a small draft of air rushes past you");
+                                                Console.WriteLine("You place the ring into an alcove and the lights in the room flare momentarily");
                                             }
                                             else
                                             {
@@ -1416,13 +1438,14 @@ and inlaid with pearl:
                                 }
                                 else
                                 {
-                                    Console.WriteLine("You step through the open doors into the tomb beyond");
+                                    Console.Clear();
+                                    Console.WriteLine("You step through the open stone doors into the narrow hallway beyond");
                                     Console.WriteLine("TOMB is WIP, thank you for getting this far!" +
                                         "\nPlease let me know what you liked (or didn't like) about the experience so far!" +
                                         "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++" +
-                                        "\nTis a fearful thing: to love that which death can touch");
+                                        "\n\"Tis a fearful thing: to love that which death can touch\"");
                                     crypt.IsCurrentRoom = false;
-                                    //tomb.IsCurrentRoom = true;
+                                    tomb.IsCurrentRoom = true;
                                 }
                                 break;
 
@@ -1442,7 +1465,22 @@ and inlaid with pearl:
                         }
                         
                     }//end crypt room
-                    
+
+                    while (tomb.IsCurrentRoom)
+                    {
+                        Console.WriteLine(tomb);
+                        if (tomb.IsPuzzleComplete)
+                        {
+
+                        }
+                        else
+                        {
+
+                        }
+
+                        
+                    }
+
                     #endregion
 
                 }//end MAIN GAME loop
